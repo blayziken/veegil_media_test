@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veegil_media_test/utils/margins.dart';
 
 import 'auth/login.dart';
 import 'auth/signup.dart';
@@ -14,21 +15,25 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         height: media.height,
+        width: double.infinity,
         color: Colors.red,
         child: Column(
 //          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Spacer(
+            Spacer(
               flex: 1,
             ),
-            const Expanded(
-              child: Text(
-                'Veegil Bank',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 40.0),
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    'Veegil Bank',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60.0),
+                  ),
+                  yMargin20,
+                  Icon(Icons.attach_money_sharp, size: 100, color: Colors.white),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 50.0,
             ),
             Expanded(
               child: Column(
@@ -36,16 +41,18 @@ class WelcomeScreen extends StatelessWidget {
                   InkWell(
                     child: Container(
                       width: 280.0,
-                      height: 55.0,
+                      height: 60.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
+                      child: Center(
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ),
                     ),
@@ -53,13 +60,13 @@ class WelcomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Login(),
+                          builder: (context) => Login(),
                         ),
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 21.0,
+                  SizedBox(
+                    height: 30.0,
                   ),
                   InkWell(
                     child: Container(
@@ -69,12 +76,14 @@ class WelcomeScreen extends StatelessWidget {
                         color: Colors.red[800],
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
-                        'Signup',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
+                      child: Center(
+                        child: Text(
+                          'Signup',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ),
                     ),
@@ -82,7 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Signup(),
+                          builder: (context) => Signup(),
                         ),
                       );
                     },

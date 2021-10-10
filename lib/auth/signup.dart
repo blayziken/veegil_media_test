@@ -22,41 +22,125 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            height: media.height,
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                IconButton(
-                  padding: const EdgeInsets.all(30),
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.red,
-                    size: 30.0,
-                  ),
-                  onPressed: () => Navigator.pop(context),
+      body: SafeArea(
+        child: Container(
+          height: media.height,
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              IconButton(
+                padding: EdgeInsets.all(30),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.red,
+                  size: 30.0,
                 ),
-                Expanded(
-                  flex: 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30.0, top: 30.0),
+                onPressed: () => Navigator.pop(context),
+              ),
+              Expanded(
+                flex: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 30.0, top: 30.0),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Create An',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 37.0,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ' Account',
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 30.0, top: 15.0),
+                      child: Text(
+                        'And discover an amazing experience...',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                          fontSize: 17.5,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 100.0,
+              ),
+              Expanded(
+                flex: 0,
+                child: Padding(
+                    padding: EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
+                    child: Form(
+                      key: _formKey2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _buildPhoneNumber(),
+                          SizedBox(height: 30),
+                          _buildPassword(),
+                        ],
+                      ),
+                    )),
+              ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: InkWell(
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 40.0,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          if (!_formKey2.currentState!.validate()) {
+                            return;
+                          }
+
+                          _formKey2.currentState!.save();
+                          Navigator.pushNamed(context, '/home');
+                        },
+                      ),
+                    ),
+                    Spacer(),
+                    Center(
+                      child: InkWell(
                         child: RichText(
-                          text: const TextSpan(
-                            text: 'Create An',
+                          text: TextSpan(
+                            text: 'Already have an account?',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.black54,
                               fontWeight: FontWeight.bold,
-                              fontSize: 37.0,
+                              fontSize: 15.0,
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' Account',
+                                text: ' Login',
                                 style: TextStyle(
                                   color: Colors.red,
                                 ),
@@ -64,102 +148,16 @@ class _SignupState extends State<Signup> {
                             ],
                           ),
                         ),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 30.0, top: 15.0),
-                        child: Text(
-                          'And discover an amazing experience...',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54,
-                            fontSize: 17.5,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 30),
+                  ],
                 ),
-                const SizedBox(
-                  height: 100.0,
-                ),
-                Expanded(
-                  flex: 0,
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
-                      child: Form(
-                        key: _formKey2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            _buildPhoneNumber(),
-                            const SizedBox(height: 30),
-                            _buildPassword(),
-                          ],
-                        ),
-                      )),
-                ),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      Center(
-                        child: InkWell(
-                          child: Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.red,
-                                size: 40.0,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            if (!_formKey2.currentState!.validate()) {
-                              return;
-                            }
-
-                            _formKey2.currentState!.save();
-                            Navigator.pushNamed(context, '/home');
-                          },
-                        ),
-                      ),
-                      Spacer(),
-                      Center(
-                        child: InkWell(
-                          child: RichText(
-                            text: const TextSpan(
-                              text: 'Already have an account?',
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15.0,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: ' Login',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
@@ -168,7 +166,7 @@ class _SignupState extends State<Signup> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Phone Number',
         labelStyle: TextStyle(
           color: Colors.black,
@@ -190,7 +188,7 @@ class _SignupState extends State<Signup> {
 
   Widget _buildPassword() {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(
           color: Colors.black,

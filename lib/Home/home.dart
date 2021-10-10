@@ -4,6 +4,7 @@ import 'package:veegil_media_test/Home/views/cards_view.dart';
 import 'package:veegil_media_test/Home/views/home_view.dart';
 import 'package:veegil_media_test/Home/views/more_view.dart';
 import 'package:veegil_media_test/Home/views/payments/payments_view.dart';
+import 'package:veegil_media_test/utils/margins.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -34,16 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: CircularNotchedRectangle(),
         notchMargin: 12,
         child: Container(
-          height: 70,
+          height: 60,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            padding: EdgeInsets.symmetric(horizontal: 40.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                NavBarTab('Home', 0, Icon(Icons.home)),
-                NavBarTab('Payments', 1, Icon(Icons.send_outlined)),
-                NavBarTab('Cards', 2, Icon(Icons.credit_card_outlined)),
-                NavBarTab('More', 3, Icon(Icons.more_vert_outlined)),
+                NavBarTab('Home', 0, Icons.home), //Icon(Icons.home)
+                NavBarTab('Payments', 1, Icons.send_outlined),
+                NavBarTab('Cards', 2, Icons.credit_card_outlined),
+                NavBarTab('More', 3, Icons.more_vert_outlined),
 
                 // Column(
                 //   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,22 +130,35 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Column NavBarTab(String title, int number, Icon icon) {
+  Column NavBarTab(String title, int number, IconData icon) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        IconButton(
-          padding: EdgeInsets.all(0.0),
-          icon: icon,
-          color: currentState == number ? Colors.black : Colors.grey,
-          onPressed: () {
+        InkWell(
+          child: Icon(
+            icon,
+            size: 30,
+            color: currentState == number ? Colors.black : Colors.grey,
+          ),
+          onTap: () {
             setState(() {
               currentState = number;
             });
           },
-          iconSize: 40,
         ),
+        // IconButton(
+        //   padding: EdgeInsets.all(0.0),
+        //   icon: icon,
+        //   color: currentState == number ? Colors.black : Colors.grey,
+        //   onPressed: () {
+        //     setState(() {
+        //       currentState = number;
+        //     });
+        //   },
+        //   iconSize: 20,
+        // ),
+        SizedBox(height: 2),
         Text(
           title,
           style: TextStyle(

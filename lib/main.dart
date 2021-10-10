@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'Home/views/payments/payments_view.dart';
+import 'Home/views/payments/send_money.dart';
 import 'auth/login.dart';
 import 'auth/signup.dart';
 import 'Home/home.dart';
@@ -16,13 +18,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: const WelcomeScreen(),
+      home: WelcomeScreen(),
       routes: {
-        Login.routeName: (context) => const Login(),
-        Signup.routeName: (context) => const Signup(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        Login.routeName: (context) => Login(),
+        Signup.routeName: (context) => Signup(),
+        HomeScreen.routeName: (context) => HomeScreen(),
+        SendMoney.routeName: (context) => SendMoney(),
       },
     );
   }

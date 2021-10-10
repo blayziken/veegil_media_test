@@ -18,107 +18,149 @@ class _HomeViewState extends State<HomeView> {
       phoneNumber: '',
       date: DateTime.now(),
     ),
+    Transaction(
+      amount: '',
+      phoneNumber: '',
+      date: DateTime.now(),
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     // Size media = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                CircleAvatar(radius: 60, child: Icon(Icons.person, size: 20, color: Colors.grey)),
-                xMargin20,
-                Text('Hi, 0803322233', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
-                Spacer(),
-                Text('Add Money', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-                Container(
-                  height: 70,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: Colors.purple, width: 2),
-                  ),
-                  child: Center(
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.purple,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Center(
-                        child: Icon(Icons.add, size: 25, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          yMargin30,
-          Expanded(
-            child: Container(
-              height: 150,
-              decoration: BoxDecoration(
-                color: Colors.purple,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Account Balance',
-                    style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.w400),
-                  ),
-                  yMargin20,
-                  Text(
-                    'N 0.00',
-                    style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w900),
-                  ),
-                  // yMargin20,
-                ],
-              ),
-            ),
-          ),
-          ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return Expanded(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 0,
                 child: Row(
                   children: [
-                    CircleAvatar(radius: 60, backgroundColor: Colors.orange),
-                    xMargin20,
-                    Column(
-                      children: [
-                        Text(
-                          'Phone Numberr',
-                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
-                        yMargin5,
-                        Text(
-                          'Datetime',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                        )
-                      ],
-                    ),
+                    CircleAvatar(radius: 20, child: Icon(Icons.person, size: 25, color: Colors.white)),
+                    xMargin10,
+                    Text('Hi 0803322233', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                     Spacer(),
-                    Text(
-                      '51.00',
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                    )
+                    Text('Add Money', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                    xMargin5,
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: Colors.purple, width: 2),
+                      ),
+                      child: Center(
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(Icons.add, size: 20, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              );
-            },
-            itemCount: transactionList.length,
+              ),
+              yMargin30,
+              Expanded(
+                flex: 0,
+                child: Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Account Balance',
+                        style: TextStyle(fontSize: 30, color: Colors.white70, fontWeight: FontWeight.w400),
+                      ),
+                      yMargin5,
+                      Text(
+                        'N 0.00',
+                        style: TextStyle(fontSize: 55, color: Colors.white, fontWeight: FontWeight.w900),
+                      ),
+                      // yMargin20,
+                    ],
+                  ),
+                ),
+              ),
+              yMargin30,
+              Expanded(
+                child: Container(
+                  height: 300,
+                  color: Colors.teal,
+                  child: ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Date',
+                              style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),
+                            ),
+                            Container(
+                              color: Colors.deepOrange,
+                              height: 70,
+                              child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.center,
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(radius: 20, backgroundColor: Colors.orange),
+                                    xMargin20,
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Phone Numberr',
+                                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                        ),
+                                        yMargin5,
+                                        Text(
+                                          'Datetime',
+                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                                        )
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '51.00',
+                                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: transactionList.length,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

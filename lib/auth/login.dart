@@ -29,8 +29,8 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 IconButton(
-                  padding: const EdgeInsets.all(20),
-                  icon: const Icon(
+                  padding: EdgeInsets.all(20),
+                  icon: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.red,
                     size: 30.0,
@@ -43,9 +43,9 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(left: 30.0, top: 30.0),
+                        padding: EdgeInsets.only(left: 30.0, top: 30.0),
                         child: RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             text: 'Welcome',
                             style: TextStyle(
                               color: Colors.black,
@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 30.0, top: 15.0),
                         child: Text(
                           'We missed you.',
@@ -77,42 +77,42 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 100.0,
                 ),
                 Expanded(
                   flex: 2,
                   child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
+                      padding: EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             _buildPhoneNumber(),
-                            const SizedBox(height: 30),
+                            SizedBox(height: 30),
                             _buildPassword(),
                           ],
                         ),
                       )),
                 ),
-                const Spacer(),
+                // Spacer(),
                 Expanded(
                   child: Column(
                     children: <Widget>[
                       Center(
                         child: InkWell(
                           child: Container(
-                            height: 100,
-                            width: 100,
+                            height: 60,
+                            width: 60,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.red,
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Icon(
                                 Icons.arrow_forward,
-                                color: Colors.red,
+                                color: Colors.white,
                                 size: 40.0,
                               ),
                             ),
@@ -130,7 +130,8 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                // SizedBox(height: 30),
+                Spacer(),
               ],
             ),
           ),
@@ -141,7 +142,7 @@ class _LoginState extends State<Login> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Phone Number',
         labelStyle: TextStyle(
           color: Colors.black,
@@ -163,7 +164,7 @@ class _LoginState extends State<Login> {
 
   Widget _buildPassword() {
     return TextFormField(
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(
           color: Colors.black,
