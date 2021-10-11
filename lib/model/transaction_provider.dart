@@ -18,6 +18,7 @@ class Transactions extends ChangeNotifier {
         date: transaction.date,
         amount: transaction.amount,
         phoneNumber: transaction.phoneNumber,
+        note: transaction.note,
       );
       _transactions.add(newTransaction);
       notifyListeners();

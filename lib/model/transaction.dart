@@ -6,12 +6,14 @@ class Transaction extends ChangeNotifier {
   String phoneNumber;
   String amount;
   String date;
+  String note;
 
   Transaction({
     this.id = "",
     this.amount = "",
     this.phoneNumber = "",
     this.date = "",
+    this.note = "",
   });
 }
 //

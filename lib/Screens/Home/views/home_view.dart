@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction.dart';
+import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,13 +18,13 @@ class _HomeViewState extends State<HomeView> {
     Transaction(
       amount: '',
       phoneNumber: '',
-      date: DateTime.now(),
+      // date: DateTime.now(),
     ),
-    Transaction(
-      amount: '',
-      phoneNumber: '',
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   amount: '',
+    //   phoneNumber: '',
+    //   date: DateTime.now(),
+    // ),
   ];
 
   @override
@@ -44,29 +46,41 @@ class _HomeViewState extends State<HomeView> {
                     xMargin10,
                     Text('Hi 0803322233', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                     Spacer(),
-                    Text('Add Money', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    xMargin5,
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: Colors.purple, width: 2),
-                      ),
-                      child: Center(
-                        child: Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            color: Colors.purple,
-                            borderRadius: BorderRadius.circular(50),
+                    InkWell(
+                      child: Row(
+                        children: [
+                          Text('Add Money', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          xMargin5,
+                          Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: Colors.purple, width: 2),
+                            ),
+                            child: Center(
+                              child: Container(
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.purple,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: Center(
+                                  child: Icon(Icons.add, size: 20, color: Colors.white),
+                                ),
+                              ),
+                            ),
                           ),
-                          child: Center(
-                            child: Icon(Icons.add, size: 20, color: Colors.white),
-                          ),
-                        ),
+                        ],
                       ),
+                      onTap: () {
+                        var length = Provider.of<Transactions>(context, listen: false).getTransactionsListLength();
+                        print('---------------------');
+                        print(length);
+                        print('---------------------');
+                      },
                     ),
                   ],
                 ),

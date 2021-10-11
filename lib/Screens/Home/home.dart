@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:veegil_media_test/Home/views/cards_view.dart';
-import 'package:veegil_media_test/Home/views/home_view.dart';
-import 'package:veegil_media_test/Home/views/more_view.dart';
-import 'package:veegil_media_test/Home/views/payments/payments_view.dart';
+import 'package:veegil_media_test/Screens/Home/views/cards_view.dart';
+import 'package:veegil_media_test/Screens/Home/views/home_view.dart';
+import 'package:veegil_media_test/Screens/Home/views/more_view.dart';
+import 'package:veegil_media_test/Screens/Home/views/payments/payments_view.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
 class HomeScreen extends StatefulWidget {

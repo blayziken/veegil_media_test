@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:veegil_media_test/model/transaction.dart';
+import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
 class SendMoney extends StatefulWidget {
@@ -13,6 +16,7 @@ class SendMoney extends StatefulWidget {
 }
 
 class _SendMoneyState extends State<SendMoney> {
+  bool _spinner = false;
   // double _amount = 0.0;
   // String _bank = '';
   // int _accountNumber = 0;
@@ -83,38 +87,83 @@ class _SendMoneyState extends State<SendMoney> {
             Expanded(
               flex: 0,
               child: Center(
-                child: InkWell(
-                  child: Container(
-                    height: 60,
-                    width: media.width * 0.45,
-                    decoration: BoxDecoration(
-                      color: Colors.purple,
-                      borderRadius: BorderRadius.circular(5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.8),
-                          spreadRadius: 0.4,
-                          blurRadius: 9,
-                          offset: Offset(2, 2),
+                child: _spinner
+                    ? CircularProgressIndicator(
+                        color: Colors.green,
+                      )
+                    : InkWell(
+                        child: Container(
+                          height: 60,
+                          width: media.width * 0.45,
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.8),
+                                spreadRadius: 0.4,
+                                blurRadius: 9,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                              child: Text(
+                            'Send',
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                            ),
+                          )),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                        child: Text(
-                      'Send',
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
+                        onTap: () async {
+                          setState(() {
+                            _spinner = true;
+                          });
+
+                          print(_amountController.text);
+                          print(_bankController.text);
+                          print(_accountNumberController.text);
+                          print(_noteController.text);
+
+                          var _transaction = Transaction(
+                            id: _accountNumberController.text,
+                            phoneNumber: _accountNumberController.text,
+                            amount: _amountController.text,
+                            note: _noteController.text,
+                            date: DateTime.now().toIso8601String(),
+                          );
+
+                          try {
+                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            setState(() {
+                              _spinner = false;
+                            });
+                            Navigator.pushReplacementNamed(context, '/success');
+                          } catch (error) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            print(error);
+                            // throw error;
+                            await showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('An error occured!'),
+                                content: Text('Something went wrong.'),
+                                actions: <Widget>[
+                                  InkWell(
+                                    child: Text('Okay'),
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                        },
                       ),
-                    )),
-                  ),
-                  onTap: () {
-                    print(_amountController.text);
-                    print(_bankController.text);
-                    print(_accountNumberController.text);
-                    print(_noteController.text);
-                  },
-                ),
               ),
             ),
             // yMargin30,

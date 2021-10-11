@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'Home/views/payments/send_money.dart';
+import 'Screens/Home/views/payments/send_money.dart';
 import 'auth/login.dart';
 import 'auth/signup.dart';
-import 'Home/home.dart';
+import 'Screens/Home/home.dart';
 import 'model/transaction_provider.dart';
 import 'welcome.dart';
 
