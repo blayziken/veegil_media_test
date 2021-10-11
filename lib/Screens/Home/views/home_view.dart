@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
+import 'package:veegil_media_test/widgets/transaction_tile.dart';
 
 class HomeView extends StatefulWidget {
   static const routeName = '/home';
@@ -14,6 +15,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  bool _spinner = false;
+  var _isInit = true;
+
   List transactionList = [
     Transaction(
       amount: '',
@@ -26,6 +30,25 @@ class _HomeViewState extends State<HomeView> {
     //   date: DateTime.now(),
     // ),
   ];
+
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isInit) {
+  //     setState(() {
+  //       _spinner = true;
+  //     });
+  //     Provider.of<Transactions>(context).fetchStories().then((_) {
+  //       setState(() {
+  //         _spinner = false;
+  //       });
+  //     });
+  //     if (Provider.of<Transactions>(context).getItemsLength() == 0) {}
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  //
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +100,15 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       onTap: () {
                         var length = Provider.of<Transactions>(context, listen: false).getTransactionsListLength();
+                        var listw = Provider.of<Transactions>(context, listen: false).transactions;
+                        final List a = [];
+                        listw.forEach((element) {
+                          a.add(element.amount);
+                        });
+
                         print('---------------------');
                         print(length);
+                        print(a);
                         print('---------------------');
                       },
                     ),
@@ -120,55 +150,15 @@ class _HomeViewState extends State<HomeView> {
                   color: Colors.teal,
                   child: ListView.builder(
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Date',
-                              style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),
-                            ),
-                            Container(
-                              color: Colors.deepOrange,
-                              height: 70,
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Row(
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(radius: 20, backgroundColor: Colors.orange),
-                                    xMargin20,
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Phone Numberr',
-                                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                        ),
-                                        yMargin5,
-                                        Text(
-                                          'Datetime',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-                                        )
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      '51.00',
-                                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      final transactionsData = Provider.of<Transactions>(context).transactions;
+                      // var listw = Provider.of<Transactions>(context, listen: false).transactions
+                      // final transactions = transactionsData.transactions;
+                      return ChangeNotifierProvider.value(
+                        value: transactionsData[index],
+                        child: TransactionTile(),
                       );
                     },
-                    itemCount: transactionList.length,
+                    itemCount: Provider.of<Transactions>(context, listen: false).getTransactionsListLength(),
                   ),
                 ),
               ),
@@ -179,6 +169,8 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
+
+// 9 Aug 2021, 1:34 AM
 
 // body: Container(
 // height: media.height,

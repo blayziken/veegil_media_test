@@ -128,10 +128,10 @@ class _SendMoneyState extends State<SendMoney> {
 
                           var _transaction = Transaction(
                             id: _accountNumberController.text,
+                            type: 'Transfer',
                             phoneNumber: _accountNumberController.text,
                             amount: _amountController.text,
                             note: _noteController.text,
-                            date: DateTime.now().toIso8601String(),
                           );
 
                           try {
@@ -153,7 +153,17 @@ class _SendMoneyState extends State<SendMoney> {
                                 content: Text('Something went wrong.'),
                                 actions: <Widget>[
                                   InkWell(
-                                    child: Text('Okay'),
+                                    child: Container(
+                                      height: 30,
+                                      width: 60,
+                                      child: Text(
+                                        'Okay',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
                                     onTap: () {
                                       Navigator.of(context).pop();
                                     },

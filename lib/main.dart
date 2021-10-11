@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Screens/Home/views/payments/send_money.dart';
+import 'Screens/success.dart';
 import 'auth/login.dart';
 import 'auth/signup.dart';
 import 'Screens/Home/home.dart';
@@ -29,8 +30,17 @@ class MyApp extends StatelessWidget {
           Signup.routeName: (context) => Signup(),
           HomeScreen.routeName: (context) => HomeScreen(),
           SendMoney.routeName: (context) => SendMoney(),
+          Success.routeName: (context) => Success(),
         },
       ),
     );
   }
 }
+
+// - Signup                           DONE
+// - Login                            DONE
+// - Deposit
+// - Send Out Money (Transfer)                  DONE
+// - Show Deposit History
+// - Show Withdrawal History
+// - Show List of transactions

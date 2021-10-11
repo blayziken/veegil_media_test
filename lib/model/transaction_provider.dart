@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 
 class Transactions extends ChangeNotifier {
@@ -15,11 +16,15 @@ class Transactions extends ChangeNotifier {
     try {
       final newTransaction = Transaction(
         id: transaction.phoneNumber,
-        date: transaction.date,
+        type: transaction.type,
+
         amount: transaction.amount,
         phoneNumber: transaction.phoneNumber,
         note: transaction.note,
+        date: DateFormat('yMMMMd').format(DateTime.now()), // transaction.date,
+        time: DateFormat('kk:mm:a').format(DateTime.now()), // transaction.date,
       );
+      // 9 Aug 2021, 1:34 AM
       _transactions.add(newTransaction);
       notifyListeners();
     } catch (error) {
