@@ -34,6 +34,7 @@ class _SendMoneyState extends State<SendMoney> {
     Size media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: InkWell(child: Icon(Icons.arrow_back_ios), onTap: () => Navigator.pop(context)),
         title: Text(
           "Send Money",
@@ -161,6 +162,7 @@ class _SendMoneyState extends State<SendMoney> {
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 20,
+                                          color: Colors.red,
                                         ),
                                       ),
                                     ),

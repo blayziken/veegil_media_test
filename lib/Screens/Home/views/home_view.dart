@@ -31,28 +31,11 @@ class _HomeViewState extends State<HomeView> {
     // ),
   ];
 
-  // @override
-  // void didChangeDependencies() {
-  //   if (_isInit) {
-  //     setState(() {
-  //       _spinner = true;
-  //     });
-  //     Provider.of<Transactions>(context).fetchStories().then((_) {
-  //       setState(() {
-  //         _spinner = false;
-  //       });
-  //     });
-  //     if (Provider.of<Transactions>(context).getItemsLength() == 0) {}
-  //   }
-  //   _isInit = false;
-  //   super.didChangeDependencies();
-  //
-  //
-  // }
-
   @override
   Widget build(BuildContext context) {
     // Size media = MediaQuery.of(context).size;
+    final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -98,19 +81,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ],
                       ),
-                      onTap: () {
-                        var length = Provider.of<Transactions>(context, listen: false).getTransactionsListLength();
-                        var listw = Provider.of<Transactions>(context, listen: false).transactions;
-                        final List a = [];
-                        listw.forEach((element) {
-                          a.add(element.amount);
-                        });
-
-                        print('---------------------');
-                        print(length);
-                        print(a);
-                        print('---------------------');
-                      },
+                      onTap: () => Navigator.pushNamed(context, '/deposit'),
                     ),
                   ],
                 ),
@@ -135,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       yMargin5,
                       Text(
-                        'N 0.00',
+                        'N ${accountBalance}',
                         style: TextStyle(fontSize: 55, color: Colors.white, fontWeight: FontWeight.w900),
                       ),
                       // yMargin20,

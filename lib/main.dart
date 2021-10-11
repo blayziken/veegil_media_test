@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Screens/Home/views/payments/send_money.dart';
+import 'Screens/deposit.dart';
 import 'Screens/success.dart';
 import 'auth/login.dart';
 import 'auth/signup.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.routeName: (context) => HomeScreen(),
           SendMoney.routeName: (context) => SendMoney(),
           Success.routeName: (context) => Success(),
+          Deposit.routeName: (context) => Deposit(),
         },
       ),
     );

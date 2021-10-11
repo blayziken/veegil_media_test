@@ -3,7 +3,21 @@ import 'package:intl/intl.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 
 class Transactions extends ChangeNotifier {
+  double _accountBalance = 0.0;
+
+  double get accountBalance {
+    return _accountBalance;
+  }
+
   List<Transaction> _transactions = [];
+
+  Future<void> addAccountBalance(amount) async {
+    _accountBalance += _accountBalance + amount;
+  }
+
+  Future<void> deductAccountBalance(amount) async {
+    _accountBalance -= _accountBalance - amount;
+  }
 
   // Get Transactions
   List<Transaction> get transactions {
@@ -17,7 +31,6 @@ class Transactions extends ChangeNotifier {
       final newTransaction = Transaction(
         id: transaction.phoneNumber,
         type: transaction.type,
-
         amount: transaction.amount,
         phoneNumber: transaction.phoneNumber,
         note: transaction.note,
