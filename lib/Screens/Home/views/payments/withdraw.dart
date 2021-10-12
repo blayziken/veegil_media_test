@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:veegil_media_test/Screens/success.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
+import 'package:veegil_media_test/services/network_handler.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 class Withdraw extends StatefulWidget {
   static const routeName = '/withdraw';
@@ -27,6 +29,8 @@ class _WithdrawState extends State<Withdraw> {
       text = text + value;
     });
   }
+
+  NetworkHandler networkHandler = NetworkHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -136,10 +140,11 @@ class _WithdrawState extends State<Withdraw> {
                             ),
                           ),
                         ),
-                        onTap: () {
+                        onTap: () async {
                           setState(() {
                             _spinner = true;
                           });
+
                           if (text == '') {
                             setState(() {
                               _spinner = false;
@@ -172,6 +177,7 @@ class _WithdrawState extends State<Withdraw> {
                             );
                             return;
                           }
+                          final amount = int.parse(text);
 
                           // Check if there's enough balance to transfer out
                           final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
@@ -182,36 +188,63 @@ class _WithdrawState extends State<Withdraw> {
                             return showDialogWidget(context, 'Insufficient Balance');
                           }
 
-                          final amount = int.parse(text);
+                          Map<String, String> body = {
+                            "phoneNumber": '09028373021',
+                            "amount": text,
+                          };
+
+                          // try {
+                          //   var response = await networkHandler.post('accounts/withdraw', body);
+                          //
+                          //   if (response.statusCode == 200 || response.statusCode == 201) {
+                          //     Provider.of<Transactions>(context, listen: false).deductAccountBalance(amount);
+                          //
+                          //     var _transaction = Transaction(
+                          //       type: 'Withdraw',
+                          //       amount: amount.toString(),
+                          //     );
+                          //
+                          //     Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                          //     setState(() {
+                          //       _spinner = false;
+                          //     });
+                          //
+                          //     Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(builder: (context) => Success(text: 'Withdraw')),
+                          //     );
+                          //
+                          //   } else {
+                          //     setState(() {
+                          //       _spinner = false;
+                          //     });
+                          //     customSnackBar(context, 'Server error, try again...');
+                          //     print(response.statusCode);
+                          //   }
+                          //
+                          // } catch (error) {
+                          //   setState(() {
+                          //     _spinner = false;
+                          //   });
+                          //   throw error;
+                          // }
+
                           Provider.of<Transactions>(context, listen: false).deductAccountBalance(amount);
 
                           var _transaction = Transaction(
-                            // phoneNumber: 'Withdraw',
                             type: 'Withdraw',
                             amount: amount.toString(),
                           );
 
-                          try {
-                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                            setState(() {
-                              _spinner = false;
-                            });
-                            // Navigator.pushReplacementNamed(context, '/success');
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Success(
-                                  text: 'Withdraw',
-                                ),
-                              ),
-                            );
-                          } catch (error) {
-                            setState(() {
-                              _spinner = false;
-                            });
-                            print(error);
-                            showDialogWidget(context, 'Something went wrong.');
-                          }
+                          Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                          setState(() {
+                            _spinner = false;
+                          });
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Success(text: 'Withdraw')),
+                          );
                         },
                       ),
                     ),

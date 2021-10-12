@@ -26,10 +26,10 @@ class PaymentsView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               PaymentsTile(
-                title: "Send Money",
+                title: "Transfer Money",
                 desc: "Free transfers to all banks",
                 onTap: () {
-                  Navigator.pushNamed(context, '/send-money');
+                  Navigator.pushNamed(context, '/transfer-money');
                 },
               ),
               yMargin20,

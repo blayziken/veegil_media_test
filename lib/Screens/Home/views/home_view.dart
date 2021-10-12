@@ -7,7 +7,7 @@ import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/transaction_tile.dart';
 
 class HomeView extends StatefulWidget {
-  static const routeName = '/home';
+  static const routeName = '/home-view';
 
   const HomeView({Key? key}) : super(key: key);
   @override
@@ -15,22 +15,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool _spinner = false;
-  var _isInit = true;
-
-  List transactionList = [
-    Transaction(
-      amount: '',
-      phoneNumber: '',
-      // date: DateTime.now(),
-    ),
-    // Transaction(
-    //   amount: '',
-    //   phoneNumber: '',
-    //   date: DateTime.now(),
-    // ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     // Size media = MediaQuery.of(context).size;
@@ -50,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     CircleAvatar(radius: 20, child: Icon(Icons.person, size: 25, color: Colors.white)),
                     xMargin10,
-                    Text('Hi 0803322233', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                    Text('Hi, Welcome!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                     Spacer(),
                     InkWell(
                       child: Row(

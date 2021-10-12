@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:veegil_media_test/services/network_handler.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 /// LOGIN
 class Login extends StatefulWidget {
@@ -11,10 +13,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String _phoneNumber = '';
-  String _password = '';
+  bool _spinner = false;
+  // String _phoneNumber = '';
+  // String _password = '';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // API Network Handler Call
+  NetworkHandler networkHandler = NetworkHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -110,20 +118,57 @@ class _LoginState extends State<Login> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Center(
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                                size: 40.0,
-                              ),
+                              child: _spinner
+                                  ? CircularProgressIndicator(
+                                      backgroundColor: Colors.white,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                                    )
+                                  : Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: 40.0,
+                                    ),
                             ),
                           ),
-                          onTap: () {
+                          onTap: () async {
+                            setState(() {
+                              _spinner = true;
+                            });
+
                             if (!_formKey.currentState!.validate()) {
                               return;
                             }
 
-                            _formKey.currentState!.save();
-                            Navigator.pushNamed(context, '/home');
+                            // _formKey.currentState!.save();
+
+                            Map<String, String> body = {
+                              "phoneNumber": _phoneNumberController.text,
+                              "password": _passwordController.text,
+                            };
+
+                            // try {
+                            //   var response = await networkHandler.post('auth/login', body);
+                            //
+                            //   if (response.statusCode == 200 || response.statusCode == 201) {
+                            //     setState(() {
+                            //       _spinner = false;
+                            //     });
+                            //
+                            //     Navigator.pushReplacementNamed(context, '/home');
+                            //   } else {
+                            //     setState(() {
+                            //       _spinner = false;
+                            //     });
+                            //     customSnackBar(context, 'Error Signing in, try again...');
+                            //   }
+                            // } catch (error) {
+                            //   setState(() {
+                            //     _spinner = false;
+                            //   });
+                            //   throw (error);
+                            // }
+
+                            Navigator.pushReplacementNamed(context, '/home');
                           },
                         ),
                       ),
@@ -142,6 +187,7 @@ class _LoginState extends State<Login> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
+      controller: _phoneNumberController,
       decoration: InputDecoration(
         labelText: 'Phone Number',
         labelStyle: TextStyle(
@@ -156,14 +202,15 @@ class _LoginState extends State<Login> {
 
         return null;
       },
-      onSaved: (value) {
-        _phoneNumber = value!;
-      },
+      // onSaved: (value) {
+      //   _phoneNumberC = value!;
+      // },
     );
   }
 
   Widget _buildPassword() {
     return TextFormField(
+      controller: _passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(
@@ -179,9 +226,9 @@ class _LoginState extends State<Login> {
 
         return null;
       },
-      onSaved: (value) {
-        _password = value!;
-      },
+      // onSaved: (value) {
+      //   _password = value!;
+      // },
     );
   }
 }

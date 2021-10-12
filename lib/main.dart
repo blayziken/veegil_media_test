@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'Screens/Home/views/payments/send_money.dart';
+import 'Screens/Home/views/payments/transfer.dart';
 import 'Screens/deposit.dart';
 import 'Screens/success.dart';
 import 'Screens/Home/views/payments/withdraw.dart';

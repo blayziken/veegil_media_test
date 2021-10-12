@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'login.dart';
+import 'package:veegil_media_test/services/network_handler.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 /// SIGN UP
 class Signup extends StatefulWidget {
@@ -13,10 +13,17 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  String _phoneNumber = '';
-  String _password = '';
+  bool _spinner = false;
+
+  // String _phoneNumber = '';
+  // String _password = '';
 
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // API Network Handler Call
+  NetworkHandler networkHandler = NetworkHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -110,20 +117,56 @@ class _SignupState extends State<Signup> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                              size: 40.0,
-                            ),
+                            child: _spinner
+                                ? CircularProgressIndicator(
+                                    backgroundColor: Colors.white,
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                                  )
+                                : Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                    size: 40.0,
+                                  ),
                           ),
                         ),
-                        onTap: () {
+                        onTap: () async {
+                          setState(() {
+                            _spinner = true;
+                          });
+
                           if (!_formKey2.currentState!.validate()) {
                             return;
                           }
 
-                          _formKey2.currentState!.save();
-                          Navigator.pushNamed(context, '/home');
+                          Map<String, String> body = {
+                            "phoneNumber": _phoneNumberController.text,
+                            "password": _passwordController.text,
+                          };
+
+                          // try {
+                          //   var response = await networkHandler.post('auth/signup', body);
+                          //
+                          //   if (response.statusCode == 200 || response.statusCode == 201) {
+                          //     setState(() {
+                          //       _spinner = false;
+                          //     });
+                          //
+                          //     Navigator.pushReplacementNamed(context, '/home');
+                          //   } else {
+                          //     setState(() {
+                          //       _spinner = false;
+                          //     });
+                          //     customSnackBar(context, 'Error Signing up, try again...');
+                          //     print(response.statusCode);
+                          //   }
+                          // } catch (error) {
+                          //   setState(() {
+                          //     _spinner = false;
+                          //   });
+                          //   throw (error);
+                          // }
+
+                          Navigator.pushReplacementNamed(context, '/home');
                         },
                       ),
                     ),
@@ -166,6 +209,7 @@ class _SignupState extends State<Signup> {
 
   Widget _buildPhoneNumber() {
     return TextFormField(
+      controller: _phoneNumberController,
       decoration: InputDecoration(
         labelText: 'Phone Number',
         labelStyle: TextStyle(
@@ -180,14 +224,15 @@ class _SignupState extends State<Signup> {
 
         return null;
       },
-      onSaved: (value) {
-        _phoneNumber = value!;
-      },
+      // onSaved: (value) {
+      //   _phoneNumber = value!;
+      // },
     );
   }
 
   Widget _buildPassword() {
     return TextFormField(
+      controller: _passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(
@@ -203,96 +248,9 @@ class _SignupState extends State<Signup> {
 
         return null;
       },
-      onSaved: (value) {
-        _password = value!;
-      },
+      // onSaved: (value) {
+      //   _password = value!;
+      // },
     );
   }
-
-  // Widget _buildName() {
-  //   return TextFormField(
-  //     decoration: const InputDecoration(
-  //       labelText: 'Full Name',
-  //       labelStyle: TextStyle(
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return 'Name is required';
-  //       }
-  //
-  //       return null;
-  //     },
-  //     onSaved: (value) {
-  //       _email = value!;
-  //     },
-  //   );
-  // }
-  //
-  // Widget _buildEmail() {
-  //   return TextFormField(
-  //     decoration: const InputDecoration(
-  //       labelText: 'Email',
-  //       labelStyle: TextStyle(
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //     keyboardType: TextInputType.emailAddress,
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return 'Email is required';
-  //       }
-  //
-  //       return null;
-  //     },
-  //     onSaved: (value) {
-  //       _email = value!;
-  //     },
-  //   );
-  // }
-  //
-  // Widget _buildUserName() {
-  //   return TextFormField(
-  //     decoration: const InputDecoration(
-  //       labelText: 'Username',
-  //       labelStyle: TextStyle(
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return 'Email is required';
-  //       }
-  //
-  //       return null;
-  //     },
-  //     onSaved: (value) {
-  //       _email = value!;
-  //     },
-  //   );
-  // }
-  //
-  // Widget _buildPassword() {
-  //   return TextFormField(
-  //     decoration: const InputDecoration(
-  //       labelText: 'Password',
-  //       labelStyle: TextStyle(
-  //         color: Colors.black,
-  //       ),
-  //     ),
-  //     keyboardType: TextInputType.visiblePassword,
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return 'Email is required';
-  //       }
-  //
-  //       return null;
-  //     },
-  //     onSaved: (value) {
-  //       _email = value!;
-  //     },
-  //   );
-  // }
-
 }
