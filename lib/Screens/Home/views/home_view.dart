@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
                     InkWell(
                       child: Row(
                         children: [
-                          Text('Add Money', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          Text('Deposit', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
                           xMargin5,
                           Container(
                             height: 30,

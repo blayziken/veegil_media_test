@@ -132,16 +132,27 @@ class _SendMoneyState extends State<SendMoney> {
                           print(_accountNumberController.text);
                           print(_noteController.text);
 
+                          // Check if there's enough balance to transfer out
+                          final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
+                          if (int.parse(accountBalance) < int.parse(_amountController.text)) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            return showDialogWidget(context, 'Insufficient Balance');
+                          }
+
                           var _transaction = Transaction(
                             id: _accountNumberController.text,
                             type: 'Transfer',
-                            phoneNumber: _accountNumberController.text,
+                            phoneNumber: '${_accountNumberController.text} (Transfer)',
                             amount: _amountController.text,
                             note: _noteController.text,
                           );
 
                           try {
                             Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
+
                             setState(() {
                               _spinner = false;
                             });
@@ -152,7 +163,7 @@ class _SendMoneyState extends State<SendMoney> {
                             });
                             print(error);
                             // throw error;
-                            await showDialogWidget(context);
+                            await showDialogWidget(context, 'Something went wrong.');
                           }
                         },
                       ),
@@ -206,18 +217,8 @@ class _SendMoneyState extends State<SendMoney> {
               });
               return '';
             }
-            // if (value is! int) {
-            //   setState(() {
-            //     amountError = 'Please enter a valid amount ';
-            //   });
-            //   return '';
-            // }
-
             return null;
           },
-          // onSaved: (value) {
-          //   // _name = value!;
-          // },
         ),
       ),
     );
@@ -308,12 +309,6 @@ class _SendMoneyState extends State<SendMoney> {
               });
               return '';
             }
-            // if (value is !int) {
-            //   setState(() {
-            //     accountNumberError = 'Please enter a valid Account Number';
-            //   });
-            //   return '';
-            // }
             return null;
           },
         ),

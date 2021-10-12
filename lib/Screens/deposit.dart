@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 import 'package:provider/provider.dart';
+import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
+import 'package:veegil_media_test/widgets/show_dialog.dart';
 
 class Deposit extends StatefulWidget {
   static const routeName = '/deposit';
@@ -172,12 +174,28 @@ class _DepositState extends State<Deposit> {
                             return;
                           }
 
-                          final amount = double.parse(text);
+                          final amount = int.parse(text);
                           Provider.of<Transactions>(context, listen: false).addAccountBalance(amount);
-                          setState(() {
-                            _spinner = false;
-                          });
-                          Navigator.pushReplacementNamed(context, '/success');
+
+                          var _transaction = Transaction(
+                            phoneNumber: 'Deposit',
+                            type: 'Deposit',
+                            amount: amount.toString(),
+                          );
+
+                          try {
+                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            setState(() {
+                              _spinner = false;
+                            });
+                            Navigator.pushReplacementNamed(context, '/success');
+                          } catch (error) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            print(error);
+                            showDialogWidget(context, 'Something went wrong.');
+                          }
                         },
                       ),
                     ),

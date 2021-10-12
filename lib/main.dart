@@ -41,8 +41,9 @@ class MyApp extends StatelessWidget {
 
 // - Signup                           DONE
 // - Login                            DONE
-// - Deposit
-// - Send Out Money (Transfer)                  DONE
+// - Deposit                          DONE
+// - Send Out Money (Transfer)         DONE
+
 // - Show Deposit History
 // - Show Withdrawal History
 // - Show List of transactions
