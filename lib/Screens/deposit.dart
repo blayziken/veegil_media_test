@@ -38,11 +38,9 @@ class _DepositState extends State<Deposit> {
           child: Icon(Icons.arrow_back_ios),
           onTap: () => Navigator.pop(context),
         ),
-        title: Center(
-          child: Text(
-            'Deposit',
-            style: TextStyle(fontSize: 25),
-          ),
+        title: Text(
+          'Deposit',
+          style: TextStyle(fontSize: 25),
         ),
       ),
       body: Container(
