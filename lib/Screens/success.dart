@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
-class Success extends StatelessWidget {
+class Success extends StatefulWidget {
   static const routeName = '/success';
 
-  const Success({Key? key}) : super(key: key);
+  final String text;
 
+  const Success({Key? key, this.text = ''}) : super(key: key);
+
+  @override
+  State<Success> createState() => _SuccessState();
+}
+
+class _SuccessState extends State<Success> {
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
@@ -22,7 +29,7 @@ class Success extends StatelessWidget {
               children: [
                 // Spacer(),
                 Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +39,12 @@ class Success extends StatelessWidget {
                         size: 80,
                         color: Colors.green,
                       ),
-                      yMargin40,
+                      yMargin100,
+                      Text(
+                        '${widget.text} was',
+                        style: TextStyle(fontSize: 35, color: Colors.green, fontWeight: FontWeight.w900),
+                      ),
+                      yMargin5,
                       Text(
                         'Success',
                         style: TextStyle(fontSize: 80, color: Colors.green, fontWeight: FontWeight.w900),

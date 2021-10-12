@@ -7,6 +7,8 @@ import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
 
+import '../../../success.dart';
+
 class SendMoney extends StatefulWidget {
   static const routeName = '/send-money';
 
@@ -144,7 +146,7 @@ class _SendMoneyState extends State<SendMoney> {
                           var _transaction = Transaction(
                             id: _accountNumberController.text,
                             type: 'Transfer',
-                            phoneNumber: '${_accountNumberController.text} (Transfer)',
+                            phoneNumber: _accountNumberController.text,
                             amount: _amountController.text,
                             note: _noteController.text,
                           );
@@ -156,7 +158,15 @@ class _SendMoneyState extends State<SendMoney> {
                             setState(() {
                               _spinner = false;
                             });
-                            Navigator.pushReplacementNamed(context, '/success');
+                            // Navigator.pushReplacementNamed(context, '/success');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Success(
+                                  text: 'Transfer',
+                                ),
+                              ),
+                            );
                           } catch (error) {
                             setState(() {
                               _spinner = false;

@@ -118,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
               Expanded(
                 child: Container(
                   height: 300,
-                  color: Colors.teal,
+                  // color: Colors.teal,
                   child: ListView.builder(
                     itemBuilder: (BuildContext context, int index) {
                       final transactionsData = Provider.of<Transactions>(context).transactions;

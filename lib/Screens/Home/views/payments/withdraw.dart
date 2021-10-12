@@ -9,16 +9,16 @@ import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
 
-class Deposit extends StatefulWidget {
-  static const routeName = '/deposit';
+class Withdraw extends StatefulWidget {
+  static const routeName = '/withdraw';
 
-  const Deposit({Key? key}) : super(key: key);
+  const Withdraw({Key? key}) : super(key: key);
 
   @override
-  State<Deposit> createState() => _DepositState();
+  State<Withdraw> createState() => _WithdrawState();
 }
 
-class _DepositState extends State<Deposit> {
+class _WithdrawState extends State<Withdraw> {
   bool _spinner = false;
   String text = "";
 
@@ -40,7 +40,7 @@ class _DepositState extends State<Deposit> {
           onTap: () => Navigator.pop(context),
         ),
         title: Text(
-          'Deposit',
+          'Withdraw',
           style: TextStyle(fontSize: 25),
         ),
       ),
@@ -107,10 +107,10 @@ class _DepositState extends State<Deposit> {
                           Icons.arrow_back_ios,
                           color: Colors.black,
                         ),
-                        leftButtonFn: () {
-                          print('left button clicked');
-                          print(text);
-                        },
+                        // leftButtonFn: () {
+                        //   print('left button clicked');
+                        //   print(text);
+                        // },
                         // leftIcon: Icon(
                         //   Icons.check,
                         //   color: Colors.black,
@@ -131,7 +131,7 @@ class _DepositState extends State<Deposit> {
                           ),
                           child: Center(
                             child: Text(
-                              'Deposit',
+                              'Withdraw',
                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white),
                             ),
                           ),
@@ -173,12 +173,21 @@ class _DepositState extends State<Deposit> {
                             return;
                           }
 
+                          // Check if there's enough balance to transfer out
+                          final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
+                          if (int.parse(accountBalance) < int.parse(text)) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            return showDialogWidget(context, 'Insufficient Balance');
+                          }
+
                           final amount = int.parse(text);
-                          Provider.of<Transactions>(context, listen: false).addAccountBalance(amount);
+                          Provider.of<Transactions>(context, listen: false).deductAccountBalance(amount);
 
                           var _transaction = Transaction(
-                            // phoneNumber: 'Deposit',
-                            type: 'Deposit',
+                            // phoneNumber: 'Withdraw',
+                            type: 'Withdraw',
                             amount: amount.toString(),
                           );
 
@@ -192,7 +201,7 @@ class _DepositState extends State<Deposit> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Success(
-                                  text: 'Deposit',
+                                  text: 'Withdraw',
                                 ),
                               ),
                             );

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
-class PaymentsView extends StatelessWidget {
-  const PaymentsView({Key? key}) : super(key: key);
+class TransactionsView extends StatelessWidget {
+  const TransactionsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Payments",
+          "Transaction History",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
         ),
         centerTitle: true,
@@ -20,43 +20,26 @@ class PaymentsView extends StatelessWidget {
         // color: Colors.teal,
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              PaymentsTile(
-                title: "Send Money",
-                desc: "Free transfers to all banks",
+              HistoryTile(
+                title: "Deposit History",
+                desc: "All deposit history",
                 onTap: () {
                   Navigator.pushNamed(context, '/send-money');
                 },
               ),
-              yMargin20,
-              PaymentsTile(
-                title: "Withdraw Money",
-                desc: "Everyday errday",
+              yMargin30,
+              HistoryTile(
+                title: "Withdrawal History",
+                desc: "All deposit history",
                 onTap: () {
                   Navigator.pushNamed(context, '/withdraw');
                 },
               ),
-              yMargin20,
-              PaymentsTile(
-                title: "Send Money",
-                desc: "Free transfers to all banks",
-                onTap: () {
-                  // Navigator.pushNamed(context, '/send-money');
-                },
-              ),
-              yMargin20,
-              PaymentsTile(
-                title: "Buy Airtime",
-                desc: "Recharge any phone easily",
-                onTap: () {
-                  // Navigator.pushNamed(context, '/');
-                },
-              ),
-              yMargin20,
             ],
           ),
         ),
@@ -65,12 +48,12 @@ class PaymentsView extends StatelessWidget {
   }
 }
 
-class PaymentsTile extends StatelessWidget {
+class HistoryTile extends StatelessWidget {
   final String title;
   final String desc;
   final VoidCallback onTap;
 
-  const PaymentsTile({
+  const HistoryTile({
     required this.title,
     required this.desc,
     required this.onTap,
@@ -101,7 +84,7 @@ class PaymentsTile extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(
               children: [
-                Icon(Icons.note_add_sharp, size: 35, color: Colors.purple),
+                Icon(Icons.table_rows_rounded, size: 35, color: Colors.purple),
                 xMargin10,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
