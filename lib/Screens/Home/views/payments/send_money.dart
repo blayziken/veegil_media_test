@@ -5,22 +5,21 @@ import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
+import 'package:veegil_media_test/widgets/show_dialog.dart';
 
 class SendMoney extends StatefulWidget {
   static const routeName = '/send-money';
 
   const SendMoney({Key? key}) : super(key: key);
-
   @override
   State<SendMoney> createState() => _SendMoneyState();
 }
 
 class _SendMoneyState extends State<SendMoney> {
+  String error = "";
+  String amountError = "";
+  String accountNumberError = "";
   bool _spinner = false;
-  // double _amount = 0.0;
-  // String _bank = '';
-  // int _accountNumber = 0;
-  // String _note = '';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _amountController = TextEditingController();
@@ -28,7 +27,6 @@ class _SendMoneyState extends State<SendMoney> {
   final TextEditingController _accountNumberController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
-  //
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
@@ -60,6 +58,7 @@ class _SendMoneyState extends State<SendMoney> {
                   ),
                   yMargin5,
                   _buildAmountField(),
+                  ErrorText(error: error),
                   yMargin20,
                   Text(
                     "Bank",
@@ -67,6 +66,7 @@ class _SendMoneyState extends State<SendMoney> {
                   ),
                   yMargin5,
                   _buildBankField(),
+                  ErrorText(error: error),
                   yMargin20,
                   Text(
                     "Account Number",
@@ -74,6 +74,7 @@ class _SendMoneyState extends State<SendMoney> {
                   ),
                   yMargin5,
                   _buildAccountNumberField(),
+                  ErrorText(error: error), // ErrorText(error: accountNumberError),
                   yMargin20,
                   Text(
                     "Add a note (optional)",
@@ -118,6 +119,10 @@ class _SendMoneyState extends State<SendMoney> {
                           )),
                         ),
                         onTap: () async {
+                          if (!_formKey.currentState!.validate()) {
+                            return;
+                          }
+
                           setState(() {
                             _spinner = true;
                           });
@@ -147,32 +152,7 @@ class _SendMoneyState extends State<SendMoney> {
                             });
                             print(error);
                             // throw error;
-                            await showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text('An error occured!'),
-                                content: Text('Something went wrong.'),
-                                actions: <Widget>[
-                                  InkWell(
-                                    child: Container(
-                                      height: 30,
-                                      width: 60,
-                                      child: Text(
-                                        'Okay',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 20,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
-                              ),
-                            );
+                            await showDialogWidget(context);
                           }
                         },
                       ),
@@ -196,8 +176,11 @@ class _SendMoneyState extends State<SendMoney> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
-          keyboardType: TextInputType.number,
           controller: _amountController,
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          ],
           style: TextStyle(
             color: Colors.black,
             fontSize: 22.0,
@@ -211,11 +194,24 @@ class _SendMoneyState extends State<SendMoney> {
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),
+            errorStyle: TextStyle(
+              fontSize: 0.0,
+              height: 0.0,
+            ),
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Input an amount';
+              setState(() {
+                error = 'Field cannot be empty';
+              });
+              return '';
             }
+            // if (value is! int) {
+            //   setState(() {
+            //     amountError = 'Please enter a valid amount ';
+            //   });
+            //   return '';
+            // }
 
             return null;
           },
@@ -236,32 +232,37 @@ class _SendMoneyState extends State<SendMoney> {
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
         ),
-        child: TextFormField(
-          controller: _bankController,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 22.0,
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            hintText: 'Which Bank',
-            hintStyle: TextStyle(
-              color: Colors.grey[400],
-              fontSize: 20.0,
-              fontWeight: FontWeight.normal,
+        child: Center(
+          child: TextFormField(
+            controller: _bankController,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22.0,
             ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              hintText: 'Which Bank',
+              hintStyle: TextStyle(
+                color: Colors.grey[400],
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
+              ),
+              errorStyle: TextStyle(
+                fontSize: 0.0,
+                height: 0.0,
+              ),
+            ),
+            validator: (value) {
+              if (value!.isEmpty) {
+                setState(() {
+                  error = 'Field cannot be empty';
+                });
+                return '';
+              }
+              return null;
+            },
           ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Input an amount';
-            }
-
-            return null;
-          },
-          // onSaved: (value) {
-          //   // _name = value!;
-          // },
         ),
       ),
     );
@@ -278,7 +279,9 @@ class _SendMoneyState extends State<SendMoney> {
         ),
         child: TextFormField(
           keyboardType: TextInputType.number,
-
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          ],
           controller: _accountNumberController,
           style: TextStyle(
             color: Colors.black,
@@ -293,17 +296,26 @@ class _SendMoneyState extends State<SendMoney> {
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),
+            errorStyle: TextStyle(
+              fontSize: 0,
+              height: 0,
+            ),
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Input an amount';
+              setState(() {
+                error = 'Field cannot be empty';
+              });
+              return '';
             }
-
+            // if (value is !int) {
+            //   setState(() {
+            //     accountNumberError = 'Please enter a valid Account Number';
+            //   });
+            //   return '';
+            // }
             return null;
           },
-          // onSaved: (value) {
-          //   // _name = value!;
-          // },
         ),
       ),
     );
@@ -333,19 +345,30 @@ class _SendMoneyState extends State<SendMoney> {
               fontSize: 20.0,
               fontWeight: FontWeight.normal,
             ),
+            errorStyle: TextStyle(
+              fontSize: 0.0,
+              height: 0.0,
+            ),
           ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Input an amount';
-            }
-
-            return null;
-          },
-          // onSaved: (value) {
-          //   // _name = value!;
-          // },
         ),
       ),
+    );
+  }
+}
+
+class ErrorText extends StatelessWidget {
+  const ErrorText({
+    Key? key,
+    required this.error,
+  }) : super(key: key);
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      error,
+      style: TextStyle(color: Colors.red, fontSize: 15, fontStyle: FontStyle.italic, fontWeight: FontWeight.w300),
     );
   }
 }
