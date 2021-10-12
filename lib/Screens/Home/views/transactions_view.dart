@@ -29,7 +29,7 @@ class TransactionsView extends StatelessWidget {
                 title: "Deposit History",
                 desc: "All deposit history",
                 onTap: () {
-                  Navigator.pushNamed(context, '/send-money');
+                  Navigator.pushNamed(context, '/deposit-history');
                 },
               ),
               yMargin30,
@@ -37,7 +37,7 @@ class TransactionsView extends StatelessWidget {
                 title: "Withdrawal History",
                 desc: "All deposit history",
                 onTap: () {
-                  Navigator.pushNamed(context, '/withdraw');
+                  Navigator.pushNamed(context, '/withdrawal-history');
                 },
               ),
             ],

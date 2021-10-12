@@ -31,6 +31,10 @@ class TransactionDetails extends StatelessWidget {
           child: Icon(Icons.arrow_back_ios),
           onTap: () => Navigator.pop(context),
         ),
+        title: Text(
+          "Transaction Detail",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),

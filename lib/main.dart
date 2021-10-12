@@ -4,6 +4,8 @@ import 'Screens/Home/views/payments/send_money.dart';
 import 'Screens/deposit.dart';
 import 'Screens/success.dart';
 import 'Screens/Home/views/payments/withdraw.dart';
+import 'Screens/transactions/deposit_history.dart';
+import 'Screens/transactions/withdrawal_history.dart';
 import 'auth/login.dart';
 import 'auth/signup.dart';
 import 'Screens/Home/home.dart';
@@ -39,6 +41,10 @@ class MyApp extends StatelessWidget {
           Withdraw.routeName: (context) => Withdraw(),
 
           Success.routeName: (context) => Success(),
+
+          // Transaction Histories
+          DepositHistory.routeName: (context) => DepositHistory(),
+          WithdrawalHistory.routeName: (context) => WithdrawalHistory(),
         },
       ),
     );
