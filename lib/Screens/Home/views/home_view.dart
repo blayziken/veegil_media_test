@@ -117,7 +117,7 @@ class _HomeViewState extends State<HomeView> {
               yMargin30,
               Expanded(
                 child: Container(
-                  height: 300,
+                  // height: 300,
                   // color: Colors.teal,
                   child: ListView.builder(
                     itemBuilder: (BuildContext context, int index) {

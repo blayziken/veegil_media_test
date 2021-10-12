@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
+import 'package:veegil_media_test/widgets/transaction_tile.dart';
 
 class DepositHistory extends StatelessWidget {
   static const routeName = '/deposit-history';
@@ -10,6 +11,7 @@ class DepositHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
+    final transactionsData = Provider.of<Transactions>(context, listen: false).depositTransactions;
 
     return Scaffold(
       appBar: AppBar(
@@ -20,64 +22,30 @@ class DepositHistory extends StatelessWidget {
           onTap: () => Navigator.pop(context),
         ),
         title: Text(
-          "Transaction Detail",
+          "Deposit Transaction History",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(left: 10.0, right: 10, top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-                child: InkWell(
               child: Container(
-                height: 50,
-                width: 50,
-                color: Colors.teal,
-                child: Center(child: Icon(Icons.add, size: 40)),
+                // height: 300,
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ChangeNotifierProvider.value(
+                      value: transactionsData[index],
+                      child: TransactionTile(),
+                    );
+                  },
+                  itemCount: transactionsData.length,
+                ),
               ),
-              onTap: () {
-                final transactionsList = Provider.of<Transactions>(context).transactions;
-                final depositList = transactionsList.map((transaction) => transaction.type == "Deposit");
-
-                print('----------------------');
-                print(depositList);
-
-                print('----------------------');
-              },
-            )),
-            // Expanded(
-            //   child: Container(
-            //     height: 300,
-            //     // color: Colors.teal,
-            //     child: ListView.builder(
-            //       itemBuilder: (BuildContext context, int index) {
-            //         final transactionsList = Provider.of<Transactions>(context).transactions;
-            //         // var listw = Provider.of<Transactions>(context, listen: false).transactions
-            //
-            //         // final depositList = [];
-            //         // for (final transaction in transactionsList) {
-            //         //   if(transaction.type == "Deposit") {
-            //         //     depositList.add(transaction);
-            //         //   }
-            //         // }
-            //
-            //         final depositList = transactionsList.map((transaction) => transaction.type == "Deposit");
-            //         print(depositList);
-            //
-            //         // final transactions = transactionsData.;
-            //
-            //         return ChangeNotifierProvider.value(
-            //           value: transactionsData[index],
-            //           child: TransactionTile(),
-            //         );
-            //       },
-            //       itemCount: Provider.of<Transactions>(context, listen: false).getTransactionsListLength(),
-            //     ),
-            //   ),
-            // ),
+            ),
           ],
         ),
       ),

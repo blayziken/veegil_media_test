@@ -4,17 +4,20 @@ import 'package:veegil_media_test/model/transaction.dart';
 
 class Transactions extends ChangeNotifier {
   int _accountBalance = 0;
+  List<Transaction> _transactions = [];
+  List<Transaction> _depositTransactions = [];
+  List<Transaction> _withdrawalTransactions = [];
 
   String get accountBalance {
     return NumberFormat("###,###", "en_US").format(_accountBalance);
   }
 
-  List<Transaction> _transactions = [];
-
+  // Increase Account Balance
   Future<void> addAccountBalance(int amount) async {
     _accountBalance = _accountBalance + amount;
   }
 
+  // Decrease Account Balance
   Future<void> deductAccountBalance(int amount) async {
     _accountBalance = _accountBalance - amount;
   }
@@ -22,7 +25,6 @@ class Transactions extends ChangeNotifier {
   // Get Transactions
   List<Transaction> get transactions {
     return [..._transactions.reversed];
-//    _items.sort()
   }
 
   // Add Transaction
@@ -37,8 +39,15 @@ class Transactions extends ChangeNotifier {
         date: DateFormat('yMMMMd').format(DateTime.now()), // transaction.date,
         time: DateFormat('kk:mm:a').format(DateTime.now()), // transaction.date,
       );
-      // 9 Aug 2021, 1:34 AM
+
       _transactions.add(newTransaction);
+
+      if (transaction.type == "Deposit") {
+        _depositTransactions.add(newTransaction);
+      } else if (transaction.type == "Withdraw") {
+        _withdrawalTransactions.add(newTransaction);
+      }
+
       notifyListeners();
     } catch (error) {
       print(error);
@@ -50,25 +59,24 @@ class Transactions extends ChangeNotifier {
   int getTransactionsListLength() {
     return _transactions.length;
   }
+
+  // Get Deposit Transaction List
+  List<Transaction> get depositTransactions {
+    return [..._depositTransactions.reversed];
+  }
+  //
+  // // Get Length of Deposit Transaction List
+  // int getDepositTransactionsListLength() {
+  //   return _depositTransactions.length;
+  // }
+
+  // Get Withdraw  Transaction List
+  List<Transaction> get withdrawTransactions {
+    return [..._withdrawalTransactions.reversed];
+  }
+
+  // // Get Length of Withdraw Transaction List
+  // int getWithdrawTransactionsListLength() {
+  //   return _withdrawalTransactions.length;
+  // }
 }
-
-// dateTime: DateFormat('dd/MM/yyyy').format(DateTime.now()), //didn't use
-//        dateTime: DateTime.now().toString(), //didn't use
-
-// Future<void> fetchTransactions() async {
-//   try {
-//     final List<Transaction> loadedTransactions = [];
-//
-//     // loadedTransactions.add(
-//     //   Transaction(
-//     //     id: ,
-//     //
-//     //   ),
-//     // );
-//
-//     _transactions = loadedTransactions;
-//     notifyListeners();
-//   } catch (error) {
-//     throw (error);
-//   }
-// }

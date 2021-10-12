@@ -57,5 +57,5 @@ class MyApp extends StatelessWidget {
 // - Send Out Money (Transfer)         DONE
 // - Show List of transactions         DONE
 
-// - Show Deposit History
-// - Show Withdrawal History
+// - Show Deposit History         DONE
+// - Show Withdrawal History          DONE
