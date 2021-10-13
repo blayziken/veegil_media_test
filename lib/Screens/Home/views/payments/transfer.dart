@@ -202,7 +202,7 @@ class _SendMoneyState extends State<SendMoney> {
                             setState(() {
                               _spinner = false;
                             });
-                            // Navigator.pushReplacementNamed(context, '/success');
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

@@ -1,12 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
-import 'auth/login.dart';
-import 'auth/signup.dart';
-
 class WelcomeScreen extends StatelessWidget {
   static const routeName = '/reddish-ui';
-
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,91 +13,68 @@ class WelcomeScreen extends StatelessWidget {
       body: Container(
         height: media.height,
         width: double.infinity,
-        color: Colors.red,
-        child: Column(
-//          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Spacer(
-              flex: 1,
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  Text(
-                    'Veegil Bank',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 50),
-                  ),
-                  yMargin20,
-                  Icon(Icons.attach_money_sharp, size: 50, color: Colors.white),
-                ],
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+            image: AssetImage("assets/building.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+          child: Column(
+            children: <Widget>[
+              Spacer(flex: 1),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Text('Veegil Bank', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w900, fontSize: 60)),
+                    yMargin20,
+                    Icon(Icons.attach_money_sharp, size: 50, color: Colors.purple),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  InkWell(
-                    child: Container(
-                      width: 280.0,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.w900,
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      child: Container(
+                        width: 280.0,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Login',
+                            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
+                      onTap: () => Navigator.pushNamed(context, '/login'),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Login(),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  InkWell(
-                    child: Container(
-                      width: 280.0,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: Colors.red[800],
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Signup',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.w900,
+                    SizedBox(height: 30.0),
+                    InkWell(
+                      child: Container(
+                        width: 280.0,
+                        height: 60.0,
+                        decoration: BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(30)),
+                        child: Center(
+                          child: Text(
+                            'Signup',
+                            style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
+                      onTap: () => Navigator.pushNamed(context, '/sign-up'),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Signup(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

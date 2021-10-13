@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
+class MoreView extends StatelessWidget {
+  const MoreView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

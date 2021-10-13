@@ -10,7 +10,6 @@ class DepositHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
     final transactionsData = Provider.of<Transactions>(context, listen: false).depositTransactions;
 
     return Scaffold(

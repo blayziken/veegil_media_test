@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
-import 'package:veegil_media_test/widgets/snack_bar.dart';
 
-/// SIGN UP
 class Signup extends StatefulWidget {
   static const routeName = '/sign-up';
 
   const Signup({Key? key}) : super(key: key);
-
   @override
   _SignupState createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
   bool _spinner = false;
-
-  // String _phoneNumber = '';
-  // String _password = '';
 
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -37,11 +31,7 @@ class _SignupState extends State<Signup> {
             children: <Widget>[
               IconButton(
                 padding: EdgeInsets.only(top: 30, left: 30),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.red,
-                  size: 30.0,
-                ),
+                icon: Icon(Icons.arrow_back_ios, color: Colors.red, size: 30.0),
                 onPressed: () => Navigator.pop(context),
               ),
               Expanded(
@@ -74,34 +64,29 @@ class _SignupState extends State<Signup> {
                       padding: EdgeInsets.only(left: 30.0, top: 10.0),
                       child: Text(
                         'And discover an amazing experience...',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
-                          fontSize: 17.5,
-                        ),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54, fontSize: 17.5),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 5.0,
-              ),
+              SizedBox(height: 5.0),
               Expanded(
                 flex: 1,
                 child: Padding(
-                    padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
-                    child: Form(
-                      key: _formKey2,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          _buildPhoneNumber(),
-                          SizedBox(height: 30),
-                          _buildPassword(),
-                        ],
-                      ),
-                    )),
+                  padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
+                  child: Form(
+                    key: _formKey2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _buildPhoneNumber(),
+                        SizedBox(height: 30),
+                        _buildPassword(),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 child: Column(
@@ -223,12 +208,8 @@ class _SignupState extends State<Signup> {
         if (value!.isEmpty) {
           return 'Phone number required';
         }
-
         return null;
       },
-      // onSaved: (value) {
-      //   _phoneNumber = value!;
-      // },
     );
   }
 
@@ -247,12 +228,8 @@ class _SignupState extends State<Signup> {
         if (value!.isEmpty) {
           return 'Password is required';
         }
-
         return null;
       },
-      // onSaved: (value) {
-      //   _password = value!;
-      // },
     );
   }
 }

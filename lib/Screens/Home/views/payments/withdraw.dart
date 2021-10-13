@@ -9,7 +9,6 @@ import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
-import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 class Withdraw extends StatefulWidget {
   static const routeName = '/withdraw';
@@ -249,7 +248,6 @@ class _WithdrawState extends State<Withdraw> {
                       ),
                     ),
                     yMargin15,
-
                     // Spacer(),
                   ],
                 ),

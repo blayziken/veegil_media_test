@@ -177,7 +177,6 @@ class _DepositState extends State<Deposit> {
                           Provider.of<Transactions>(context, listen: false).addAccountBalance(amount);
 
                           var _transaction = Transaction(
-                            // phoneNumber: 'Deposit',
                             type: 'Deposit',
                             amount: amount.toString(),
                           );
@@ -207,7 +206,6 @@ class _DepositState extends State<Deposit> {
                       ),
                     ),
                     yMargin15,
-
                     // Spacer(),
                   ],
                 ),

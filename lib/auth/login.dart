@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
-import 'package:veegil_media_test/widgets/snack_bar.dart';
 
-/// LOGIN
 class Login extends StatefulWidget {
   static const routeName = '/login';
 
@@ -14,8 +12,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _spinner = false;
-  // String _phoneNumber = '';
-  // String _password = '';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -37,11 +33,7 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 IconButton(
                   padding: EdgeInsets.only(left: 20, top: 20, bottom: 10),
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.red,
-                    size: 30.0,
-                  ),
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.red, size: 30.0),
                   onPressed: () => Navigator.pop(context),
                 ),
                 Expanded(
@@ -84,24 +76,23 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                SizedBox(height: 30.0),
                 Expanded(
                   flex: 2,
                   child: Padding(
-                      padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            _buildPhoneNumber(),
-                            SizedBox(height: 30),
-                            _buildPassword(),
-                          ],
-                        ),
-                      )),
+                    padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _buildPhoneNumber(),
+                          SizedBox(height: 30),
+                          _buildPassword(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 Spacer(),
                 Expanded(
@@ -122,11 +113,7 @@ class _LoginState extends State<Login> {
                                       backgroundColor: Colors.white,
                                       valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                                     )
-                                  : Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                      size: 30.0,
-                                    ),
+                                  : Icon(Icons.arrow_forward, color: Colors.white, size: 30.0),
                             ),
                           ),
                           onTap: () async {
@@ -140,8 +127,6 @@ class _LoginState extends State<Login> {
                               });
                               return;
                             }
-
-                            // _formKey.currentState!.save();
 
                             Map<String, String> body = {
                               "phoneNumber": _phoneNumberController.text,
@@ -201,12 +186,8 @@ class _LoginState extends State<Login> {
         if (value!.isEmpty) {
           return 'Phone number required';
         }
-
         return null;
       },
-      // onSaved: (value) {
-      //   _phoneNumberC = value!;
-      // },
     );
   }
 
@@ -225,12 +206,8 @@ class _LoginState extends State<Login> {
         if (value!.isEmpty) {
           return 'Password is required';
         }
-
         return null;
       },
-      // onSaved: (value) {
-      //   _password = value!;
-      // },
     );
   }
 }

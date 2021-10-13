@@ -28,33 +28,25 @@ class PaymentsView extends StatelessWidget {
               PaymentsTile(
                 title: "Transfer Money",
                 desc: "Free transfers to all banks",
-                onTap: () {
-                  Navigator.pushNamed(context, '/transfer-money');
-                },
+                onTap: () => Navigator.pushNamed(context, '/transfer-money'),
               ),
               yMargin20,
               PaymentsTile(
                 title: "Withdraw Money",
                 desc: "Everyday errday",
-                onTap: () {
-                  Navigator.pushNamed(context, '/withdraw');
-                },
+                onTap: () => Navigator.pushNamed(context, '/withdraw'),
               ),
               yMargin20,
               PaymentsTile(
                 title: "Send Money",
                 desc: "Free transfers to all banks",
-                onTap: () {
-                  // Navigator.pushNamed(context, '/send-money');
-                },
+                onTap: () {},
               ),
               yMargin20,
               PaymentsTile(
                 title: "Buy Airtime",
                 desc: "Recharge any phone easily",
-                onTap: () {
-                  // Navigator.pushNamed(context, '/');
-                },
+                onTap: () {},
               ),
               yMargin20,
             ],

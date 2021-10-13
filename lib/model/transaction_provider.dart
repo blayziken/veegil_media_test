@@ -64,19 +64,9 @@ class Transactions extends ChangeNotifier {
   List<Transaction> get depositTransactions {
     return [..._depositTransactions.reversed];
   }
-  //
-  // // Get Length of Deposit Transaction List
-  // int getDepositTransactionsListLength() {
-  //   return _depositTransactions.length;
-  // }
 
   // Get Withdraw  Transaction List
   List<Transaction> get withdrawTransactions {
     return [..._withdrawalTransactions.reversed];
   }
-
-  // // Get Length of Withdraw Transaction List
-  // int getWithdrawTransactionsListLength() {
-  //   return _withdrawalTransactions.length;
-  // }
 }

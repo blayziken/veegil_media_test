@@ -41,11 +41,9 @@ class TransactionTile extends StatelessWidget {
             padding: EdgeInsets.all(5.0),
             child: InkWell(
               child: Container(
-                // color: Colors.deepOrange,
                 height: 70,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  // borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -56,12 +54,13 @@ class TransactionTile extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(5.0),
+                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
                   child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(radius: 20, backgroundColor: Colors.orange),
+                      CircleAvatar(
+                        radius: 15,
+                        child: Icon(Icons.assignment),
+                      ),
                       xMargin20,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

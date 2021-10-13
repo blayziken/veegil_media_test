@@ -28,17 +28,13 @@ class TransactionsView extends StatelessWidget {
               HistoryTile(
                 title: "Deposit History",
                 desc: "All deposit history",
-                onTap: () {
-                  Navigator.pushNamed(context, '/deposit-history');
-                },
+                onTap: () => Navigator.pushNamed(context, '/deposit-history'),
               ),
               yMargin30,
               HistoryTile(
                 title: "Withdrawal History",
                 desc: "All deposit history",
-                onTap: () {
-                  Navigator.pushNamed(context, '/withdrawal-history');
-                },
+                onTap: () => Navigator.pushNamed(context, '/withdrawal-history'),
               ),
             ],
           ),
