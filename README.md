@@ -1,7 +1,12 @@
 # Toluwalope Oluyipe 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+How to run:
+- Clone this repo
+- Go to terminal and run 'flutter pub get' to install all packages used
+- Run the app and you're good to go
+
+The APK file is in the repo
 
 A few resources to get you started if this is your first Flutter project:
 
