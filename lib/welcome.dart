@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  static const routeName = '/reddish-ui';
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +13,6 @@ class WelcomeScreen extends StatelessWidget {
         height: media.height,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.red,
           image: DecorationImage(
             image: AssetImage("assets/building.jpg"),
             fit: BoxFit.cover,
