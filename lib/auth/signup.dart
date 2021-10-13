@@ -50,7 +50,7 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 10.0),
+                      padding: EdgeInsets.only(left: 30.0, top: 30.0),
                       child: RichText(
                         text: TextSpan(
                           text: 'Create An',
@@ -85,10 +85,10 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 5.0,
               ),
               Expanded(
-                flex: 0,
+                flex: 1,
                 child: Padding(
                     padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
                     child: Form(

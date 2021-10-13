@@ -104,7 +104,7 @@ class _DepositState extends State<Deposit> {
                           });
                         },
                         rightIcon: Icon(
-                          Icons.arrow_back_ios,
+                          Icons.backspace_rounded,
                           color: Colors.black,
                         ),
                         leftButtonFn: () {

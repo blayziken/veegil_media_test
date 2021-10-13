@@ -16,15 +16,15 @@ class TransactionTile extends StatelessWidget {
 
     if (transaction.type == "Deposit") {
       title = "Deposit";
-      amount = "+ ${transaction.amount}";
+      amount = "+ N${transaction.amount}";
       color = Colors.green;
     } else if (transaction.type == "Withdraw") {
       title = "Withdraw";
-      amount = "- ${transaction.amount}";
+      amount = "- N${transaction.amount}";
       color = Colors.red;
     } else if (transaction.type == "Transfer") {
       title = transaction.phoneNumber;
-      amount = "- ${transaction.amount}";
+      amount = "- N${transaction.amount}";
       color = Colors.red;
     }
 
@@ -82,7 +82,7 @@ class TransactionTile extends StatelessWidget {
                       Text(
                         amount, //transaction.amount, //'51.00',
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 22,
                           fontWeight: FontWeight.w900,
                           color: color,
                         ),

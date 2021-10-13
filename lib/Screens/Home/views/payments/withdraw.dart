@@ -108,7 +108,7 @@ class _WithdrawState extends State<Withdraw> {
                           });
                         },
                         rightIcon: Icon(
-                          Icons.arrow_back_ios,
+                          Icons.backspace_rounded,
                           color: Colors.black,
                         ),
                         // leftButtonFn: () {
