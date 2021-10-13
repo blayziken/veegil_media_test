@@ -21,7 +21,6 @@ class _LoginState extends State<Login> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // API Network Handler Call
   NetworkHandler networkHandler = NetworkHandler();
 
   @override
@@ -37,7 +36,7 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 IconButton(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.only(left: 20, top: 20, bottom: 10),
                   icon: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.red,
@@ -51,7 +50,7 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 30.0, top: 30.0),
+                        padding: EdgeInsets.only(left: 30.0, top: 10.0),
                         child: RichText(
                           text: TextSpan(
                             text: 'Welcome',
@@ -72,7 +71,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 30.0, top: 15.0),
+                        padding: EdgeInsets.only(left: 30.0, top: 5.0),
                         child: Text(
                           'We missed you.',
                           style: TextStyle(
@@ -86,12 +85,12 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(
-                  height: 100.0,
+                  height: 30.0,
                 ),
                 Expanded(
                   flex: 2,
                   child: Padding(
-                      padding: EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
+                      padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
                       child: Form(
                         key: _formKey,
                         child: Column(
@@ -104,7 +103,7 @@ class _LoginState extends State<Login> {
                         ),
                       )),
                 ),
-                // Spacer(),
+                Spacer(),
                 Expanded(
                   child: Column(
                     children: <Widget>[
@@ -126,7 +125,7 @@ class _LoginState extends State<Login> {
                                   : Icon(
                                       Icons.arrow_forward,
                                       color: Colors.white,
-                                      size: 40.0,
+                                      size: 30.0,
                                     ),
                             ),
                           ),
@@ -136,6 +135,9 @@ class _LoginState extends State<Login> {
                             });
 
                             if (!_formKey.currentState!.validate()) {
+                              setState(() {
+                                _spinner = false;
+                              });
                               return;
                             }
 
@@ -175,8 +177,8 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                // SizedBox(height: 30),
-                Spacer(),
+                SizedBox(height: 30),
+                // Spacer(),
               ],
             ),
           ),

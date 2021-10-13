@@ -4,6 +4,7 @@ const yMargin5 = SizedBox(height: 5.0);
 const yMargin10 = SizedBox(height: 10.0);
 const yMargin15 = SizedBox(height: 15.0);
 const yMargin20 = SizedBox(height: 20.0);
+const yMargin25 = SizedBox(height: 25.0);
 const yMargin30 = SizedBox(height: 30.0);
 const yMargin40 = SizedBox(height: 40.0);
 const yMargin50 = SizedBox(height: 50.0);

@@ -7,7 +7,6 @@ class Success extends StatefulWidget {
   static const routeName = '/success';
 
   final String text;
-
   const Success({Key? key, this.text = ''}) : super(key: key);
 
   @override
@@ -56,8 +55,8 @@ class _SuccessState extends State<Success> {
                   flex: 0,
                   child: InkWell(
                     child: Container(
-                      height: media.height * 0.04,
-                      width: media.width * 0.2,
+                      height: media.height * 0.06,
+                      width: media.width * 0.4,
                       decoration: BoxDecoration(
                         color: Colors.purple,
                         borderRadius: BorderRadius.circular(5),
@@ -67,7 +66,7 @@ class _SuccessState extends State<Success> {
                           'Close',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 25,
                             fontWeight: FontWeight.w400,
                           ),
                         ),

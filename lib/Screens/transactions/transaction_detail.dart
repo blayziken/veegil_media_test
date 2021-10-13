@@ -45,7 +45,7 @@ class TransactionDetails extends StatelessWidget {
               child: Center(
                 child: Text(
                   date, // 'Date',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
                 ),
               ),
             ),
@@ -65,7 +65,7 @@ class TransactionDetails extends StatelessWidget {
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: color),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin20,
+                  yMargin10,
                   Text(
                     'To',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
@@ -75,7 +75,7 @@ class TransactionDetails extends StatelessWidget {
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin20,
+                  yMargin10,
                   Text(
                     'Description',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
@@ -85,7 +85,7 @@ class TransactionDetails extends StatelessWidget {
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: color),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin20,
+                  yMargin10,
                   Text(
                     'Fees',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
@@ -103,7 +103,7 @@ class TransactionDetails extends StatelessWidget {
               flex: 0,
               child: InkWell(
                 child: Container(
-                  height: media.height * 0.058,
+                  height: media.height * 0.06,
                   width: media.width * 0.4,
                   decoration: BoxDecoration(
                     color: Colors.purple,

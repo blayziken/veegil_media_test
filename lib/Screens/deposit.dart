@@ -54,13 +54,13 @@ class _DepositState extends State<Deposit> {
                 ),
               )
             : Padding(
-                padding: EdgeInsets.only(top: 40, left: 25.0, right: 25.0),
+                padding: EdgeInsets.only(top: 15, left: 25.0, right: 25.0),
                 child: Column(
                   children: [
                     Expanded(
                       flex: 0,
                       child: Container(
-                        height: 200,
+                        height: media.height * 0.16, // 200,
                         // color: Colors.black,
                         child: Center(
                           child: Row(
@@ -76,7 +76,7 @@ class _DepositState extends State<Deposit> {
                                 child: Center(
                                   child: Text(
                                     'N',
-                                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -84,7 +84,7 @@ class _DepositState extends State<Deposit> {
                               Flexible(
                                 child: Text(
                                   text,
-                                  style: TextStyle(fontSize: 100, fontWeight: FontWeight.w900, color: Colors.black),
+                                  style: TextStyle(fontSize: 80, fontWeight: FontWeight.w900, color: Colors.black),
                                 ),
                               ),
                             ],
@@ -92,9 +92,9 @@ class _DepositState extends State<Deposit> {
                         ),
                       ),
                     ),
-                    yMargin60,
+                    yMargin25,
                     Expanded(
-                      flex: 0,
+                      flex: 3,
                       child: NumericKeyboard(
                         onKeyboardTap: _onKeyboardTap,
                         textColor: Colors.black,
@@ -132,7 +132,7 @@ class _DepositState extends State<Deposit> {
                           child: Center(
                             child: Text(
                               'Deposit',
-                              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white),
+                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white),
                             ),
                           ),
                         ),
@@ -206,7 +206,9 @@ class _DepositState extends State<Deposit> {
                         },
                       ),
                     ),
-                    Spacer(),
+                    yMargin15,
+
+                    // Spacer(),
                   ],
                 ),
               ),

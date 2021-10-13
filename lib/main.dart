@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => Transactions(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Veegil Media App',
         theme: ThemeData(
           primarySwatch: Colors.purple,
         ),
@@ -50,12 +50,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// - Signup                           DONE
-// - Login                            DONE
-// - Deposit                          DONE
-// - Send Out Money (Transfer)         DONE
-// - Show List of transactions         DONE
-
-// - Show Deposit History         DONE
-// - Show Withdrawal History          DONE

@@ -42,176 +42,183 @@ class _SendMoneyState extends State<SendMoney> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Amount",
-                    style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+      body: Container(
+        height: media.height,
+        width: double.infinity,
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                flex: 0,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Amount",
+                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                      ),
+                      yMargin5,
+                      _buildAmountField(),
+                      ErrorText(error: error),
+                      yMargin10,
+                      Text(
+                        "Bank",
+                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                      ),
+                      yMargin5,
+                      _buildBankField(),
+                      ErrorText(error: error),
+                      yMargin10,
+                      Text(
+                        "Account Number",
+                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                      ),
+                      yMargin5,
+                      _buildAccountNumberField(),
+                      ErrorText(error: error), // ErrorText(error: accountNumberError),
+                      yMargin10,
+                      Text(
+                        "Add a note (optional)",
+                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                      ),
+                      yMargin5,
+                      _buildAddNoteField(),
+                    ],
                   ),
-                  yMargin5,
-                  _buildAmountField(),
-                  ErrorText(error: error),
-                  yMargin20,
-                  Text(
-                    "Bank",
-                    style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
-                  ),
-                  yMargin5,
-                  _buildBankField(),
-                  ErrorText(error: error),
-                  yMargin20,
-                  Text(
-                    "Account Number",
-                    style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
-                  ),
-                  yMargin5,
-                  _buildAccountNumberField(),
-                  ErrorText(error: error), // ErrorText(error: accountNumberError),
-                  yMargin20,
-                  Text(
-                    "Add a note (optional)",
-                    style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
-                  ),
-                  yMargin5,
-                  _buildAddNoteField(),
-                ],
+                ),
               ),
-            ),
-            Spacer(),
-            Expanded(
-              flex: 0,
-              child: Center(
-                child: _spinner
-                    ? CircularProgressIndicator(
-                        color: Colors.green,
-                      )
-                    : InkWell(
-                        child: Container(
-                          height: 60,
-                          width: media.width * 0.45,
-                          decoration: BoxDecoration(
-                            color: Colors.purple,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.8),
-                                spreadRadius: 0.4,
-                                blurRadius: 9,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                              child: Text(
-                            'Send',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
+              Spacer(),
+              Expanded(
+                flex: 0,
+                child: Center(
+                  child: _spinner
+                      ? CircularProgressIndicator(
+                          color: Colors.green,
+                        )
+                      : InkWell(
+                          child: Container(
+                            height: 60,
+                            width: media.width * 0.45,
+                            decoration: BoxDecoration(
+                              color: Colors.purple,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.8),
+                                  spreadRadius: 0.4,
+                                  blurRadius: 9,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
                             ),
-                          )),
-                        ),
-                        onTap: () async {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
+                            child: Center(
+                                child: Text(
+                              'Send',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white,
+                              ),
+                            )),
+                          ),
+                          onTap: () async {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
 
-                          setState(() {
-                            _spinner = true;
-                          });
+                            setState(() {
+                              _spinner = true;
+                            });
 
-                          print(_amountController.text);
-                          print(_bankController.text);
-                          print(_accountNumberController.text);
-                          print(_noteController.text);
+                            print(_amountController.text);
+                            print(_bankController.text);
+                            print(_accountNumberController.text);
+                            print(_noteController.text);
 
-                          // Check if there's enough balance to transfer out
-                          final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
-                          if (int.parse(accountBalance) < int.parse(_amountController.text)) {
+                            // Check if there's enough balance to transfer out
+                            final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
+                            if (int.parse(accountBalance) < int.parse(_amountController.text)) {
+                              setState(() {
+                                _spinner = false;
+                              });
+                              return showDialogWidget(context, 'Insufficient Balance');
+                            }
+
+                            var _transaction = Transaction(
+                              id: _accountNumberController.text,
+                              type: 'Transfer',
+                              phoneNumber: _accountNumberController.text,
+                              amount: _amountController.text,
+                              note: _noteController.text,
+                            );
+
+                            Map<String, String> body = {
+                              "phoneNumber": _accountNumberController.text,
+                              "amount": _amountController.text,
+                            };
+
+                            // try {
+                            //   var response = await networkHandler.post('accounts/transfer', body);
+                            //
+                            //   if (response.statusCode == 200 || response.statusCode == 201) {
+                            //     Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            //     Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
+                            //
+                            //     setState(() {
+                            //       _spinner = false;
+                            //     });
+                            //
+                            //     Navigator.pushReplacement(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => Success(
+                            //           text: 'Transfer',
+                            //         ),
+                            //       ),
+                            //     );
+                            //   } else {
+                            //     setState(() {
+                            //       _spinner = false;
+                            //     });
+                            //     customSnackBar(context, 'Server error, try again...');
+                            //     print(response.statusCode);
+                            //   }
+                            //
+                            // } catch (error) {
+                            //   setState(() {
+                            //     _spinner = false;
+                            //   });
+                            //   throw error;
+                            // }
+
+                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
+
                             setState(() {
                               _spinner = false;
                             });
-                            return showDialogWidget(context, 'Insufficient Balance');
-                          }
-
-                          var _transaction = Transaction(
-                            id: _accountNumberController.text,
-                            type: 'Transfer',
-                            phoneNumber: _accountNumberController.text,
-                            amount: _amountController.text,
-                            note: _noteController.text,
-                          );
-
-                          Map<String, String> body = {
-                            "phoneNumber": _accountNumberController.text,
-                            "amount": _amountController.text,
-                          };
-
-                          // try {
-                          //   var response = await networkHandler.post('accounts/transfer', body);
-                          //
-                          //   if (response.statusCode == 200 || response.statusCode == 201) {
-                          //     Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                          //     Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
-                          //
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //
-                          //     Navigator.pushReplacement(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) => Success(
-                          //           text: 'Transfer',
-                          //         ),
-                          //       ),
-                          //     );
-                          //   } else {
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //     customSnackBar(context, 'Server error, try again...');
-                          //     print(response.statusCode);
-                          //   }
-                          //
-                          // } catch (error) {
-                          //   setState(() {
-                          //     _spinner = false;
-                          //   });
-                          //   throw error;
-                          // }
-
-                          Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                          Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
-
-                          setState(() {
-                            _spinner = false;
-                          });
-                          // Navigator.pushReplacementNamed(context, '/success');
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Success(
-                                text: 'Transfer',
+                            // Navigator.pushReplacementNamed(context, '/success');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Success(
+                                  text: 'Transfer',
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
+                ),
               ),
-            ),
-            // yMargin30,
-            Spacer(),
-          ],
+              yMargin5,
+              // Spacer(),
+            ],
+          ),
         ),
       ),
     );

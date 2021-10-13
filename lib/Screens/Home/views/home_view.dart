@@ -17,7 +17,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    // Size media = MediaQuery.of(context).size;
+    Size media = MediaQuery.of(context).size;
     final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance;
 
     return Scaffold(
@@ -74,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
               Expanded(
                 flex: 0,
                 child: Container(
-                  height: 200,
+                  height: media.height * 0.175, //160,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.purple,
@@ -86,12 +86,12 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         'Account Balance',
-                        style: TextStyle(fontSize: 30, color: Colors.white70, fontWeight: FontWeight.w400),
+                        style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w400),
                       ),
                       yMargin5,
                       Text(
                         'N ${accountBalance}',
-                        style: TextStyle(fontSize: 55, color: Colors.white, fontWeight: FontWeight.w900),
+                        style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.w900),
                       ),
                       // yMargin20,
                     ],

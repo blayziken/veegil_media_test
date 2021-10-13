@@ -22,7 +22,6 @@ class _SignupState extends State<Signup> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // API Network Handler Call
   NetworkHandler networkHandler = NetworkHandler();
 
   @override
@@ -37,7 +36,7 @@ class _SignupState extends State<Signup> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               IconButton(
-                padding: EdgeInsets.all(30),
+                padding: EdgeInsets.only(top: 30, left: 30),
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: Colors.red,
@@ -51,7 +50,7 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 30.0),
+                      padding: EdgeInsets.only(left: 30.0, top: 10.0),
                       child: RichText(
                         text: TextSpan(
                           text: 'Create An',
@@ -72,7 +71,7 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 15.0),
+                      padding: EdgeInsets.only(left: 30.0, top: 10.0),
                       child: Text(
                         'And discover an amazing experience...',
                         style: TextStyle(
@@ -86,12 +85,12 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               SizedBox(
-                height: 100.0,
+                height: 20.0,
               ),
               Expanded(
                 flex: 0,
                 child: Padding(
-                    padding: EdgeInsets.only(left: 30.0, bottom: 60.0, right: 60),
+                    padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
                     child: Form(
                       key: _formKey2,
                       child: Column(
@@ -125,7 +124,7 @@ class _SignupState extends State<Signup> {
                                 : Icon(
                                     Icons.arrow_forward,
                                     color: Colors.white,
-                                    size: 40.0,
+                                    size: 30.0,
                                   ),
                           ),
                         ),
@@ -135,6 +134,9 @@ class _SignupState extends State<Signup> {
                           });
 
                           if (!_formKey2.currentState!.validate()) {
+                            setState(() {
+                              _spinner = false;
+                            });
                             return;
                           }
 

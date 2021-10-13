@@ -33,11 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: CircularNotchedRectangle(),
         notchMargin: 12,
         child: Container(
-          height: media.height * 0.06, //60
+          height: media.height * 0.08, //60
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 NavBarTab('Home', 0, Icons.home), //Icon(Icons.home)
                 NavBarTab('Payments', 1, Icons.send_outlined),
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         InkWell(
           child: Icon(
             icon,
-            size: 30,
+            size: 25,
             color: currentState == number ? Colors.black : Colors.grey,
           ),
           onTap: () {
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title,
           style: TextStyle(
             color: currentState == number ? Colors.black : Colors.grey,
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: currentState == number ? FontWeight.w900 : FontWeight.w700,
           ),
         ),

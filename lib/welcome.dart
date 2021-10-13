@@ -24,14 +24,15 @@ class WelcomeScreen extends StatelessWidget {
               flex: 1,
             ),
             Expanded(
+              flex: 1,
               child: Column(
                 children: [
                   Text(
                     'Veegil Bank',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60.0),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 50),
                   ),
                   yMargin20,
-                  Icon(Icons.attach_money_sharp, size: 100, color: Colors.white),
+                  Icon(Icons.attach_money_sharp, size: 50, color: Colors.white),
                 ],
               ),
             ),
