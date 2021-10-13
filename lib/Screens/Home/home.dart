@@ -35,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           height: media.height * 0.08, //60
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 NavBarTab('Home', 0, Icons.home), //Icon(Icons.home)
                 NavBarTab('Payments', 1, Icons.send_outlined),
