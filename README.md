@@ -8,4 +8,4 @@ The app was created with Flutter using State Management With Provider
 - Go to terminal and run 'flutter pub get' to install all packages used
 - Run the app and you're good to go
 
-The APK file can be found in the 'apk' file directory.
+The APK file can be found in the 'apk files' file directory.
