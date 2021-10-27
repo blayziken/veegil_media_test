@@ -41,7 +41,7 @@ class _DepositState extends State<Deposit> {
         ),
         title: Text(
           'Deposit',
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: media.height * 0.025),
         ),
       ),
       body: Container(
@@ -54,7 +54,10 @@ class _DepositState extends State<Deposit> {
                 ),
               )
             : Padding(
-                padding: EdgeInsets.only(top: 15, left: 25.0, right: 25.0),
+                padding: EdgeInsets.only(
+                    top: media.height * 0.015,
+                    left: media.height * 0.025,
+                    right: media.height * 0.025),
                 child: Column(
                   children: [
                     Expanded(
@@ -67,8 +70,8 @@ class _DepositState extends State<Deposit> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 35,
-                                width: 35,
+                                height: media.height * 0.045,
+                                width: media.height * 0.045,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.purple,
@@ -76,15 +79,22 @@ class _DepositState extends State<Deposit> {
                                 child: Center(
                                   child: Text(
                                     'N',
-                                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: media.height * 0.027,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),
-                              xMargin20,
+                              SizedBox(width: media.height * 0.025),
+                              // xMargin20,
                               Flexible(
                                 child: Text(
                                   text,
-                                  style: TextStyle(fontSize: 80, fontWeight: FontWeight.w900, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: media.height * 0.090,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -92,7 +102,7 @@ class _DepositState extends State<Deposit> {
                         ),
                       ),
                     ),
-                    yMargin25,
+                    SizedBox(height: media.height * 0.035),
                     Expanded(
                       flex: 3,
                       child: NumericKeyboard(
@@ -123,7 +133,7 @@ class _DepositState extends State<Deposit> {
                       flex: 0,
                       child: InkWell(
                         child: Container(
-                          height: media.height * 0.058,
+                          height: media.height * 0.07,
                           width: media.width * 0.4,
                           decoration: BoxDecoration(
                             color: Colors.purple,
@@ -132,7 +142,10 @@ class _DepositState extends State<Deposit> {
                           child: Center(
                             child: Text(
                               'Deposit',
-                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: media.height * 0.035,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
@@ -152,13 +165,13 @@ class _DepositState extends State<Deposit> {
                                 actions: <Widget>[
                                   InkWell(
                                     child: Container(
-                                      height: 30,
-                                      width: 60,
+                                      height: media.height * 0.040,
+                                      width: media.height * 0.070,
                                       child: Text(
                                         'Okay',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 20,
+                                          fontSize: media.height * 0.020,
                                           color: Colors.red,
                                         ),
                                       ),
@@ -174,7 +187,8 @@ class _DepositState extends State<Deposit> {
                           }
 
                           final amount = int.parse(text);
-                          Provider.of<Transactions>(context, listen: false).addAccountBalance(amount);
+                          Provider.of<Transactions>(context, listen: false)
+                              .addAccountBalance(amount);
 
                           var _transaction = Transaction(
                             type: 'Deposit',
@@ -182,7 +196,8 @@ class _DepositState extends State<Deposit> {
                           );
 
                           try {
-                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                            Provider.of<Transactions>(context, listen: false)
+                                .addTransaction(_transaction);
                             setState(() {
                               _spinner = false;
                             });
@@ -205,7 +220,8 @@ class _DepositState extends State<Deposit> {
                         },
                       ),
                     ),
-                    yMargin15,
+                    SizedBox(height: media.height * 0.015),
+                    // yMargin15,
                     // Spacer(),
                   ],
                 ),

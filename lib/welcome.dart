@@ -19,18 +19,18 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+          filter: ImageFilter.blur(sigmaX: 4.5, sigmaY: 3.5),
           child: Column(
             children: <Widget>[
               Spacer(flex: 1),
               Expanded(
                 flex: 1,
-                child: Column(
-                  children: [
-                    Text('Veegil Bank', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w900, fontSize: 60)),
-                    yMargin20,
-                    Icon(Icons.attach_money_sharp, size: 50, color: Colors.purple),
-                  ],
+                child: Text(
+                  'Veegil Bank',
+                  style: TextStyle(
+                      color: Colors.purple,
+                      fontWeight: FontWeight.w900,
+                      fontSize: media.height * 0.080),
                 ),
               ),
               Expanded(
@@ -38,8 +38,8 @@ class WelcomeScreen extends StatelessWidget {
                   children: <Widget>[
                     InkWell(
                       child: Container(
-                        width: 280.0,
-                        height: 60.0,
+                        width: media.height * 0.380,
+                        height: media.height * 0.080,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -47,22 +47,29 @@ class WelcomeScreen extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'Login',
-                            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w900),
+                            style: TextStyle(
+                                fontSize: media.height * 0.030,
+                                fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),
                       onTap: () => Navigator.pushNamed(context, '/login'),
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(height: media.height * 0.030),
                     InkWell(
                       child: Container(
-                        width: 280.0,
-                        height: 60.0,
-                        decoration: BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(30)),
+                        width: media.height * 0.380,
+                        height: media.height * 0.080,
+                        decoration: BoxDecoration(
+                            color: Colors.red[800],
+                            borderRadius: BorderRadius.circular(30)),
                         child: Center(
                           child: Text(
                             'Signup',
-                            style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.w900),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: media.height * 0.030,
+                                fontWeight: FontWeight.w900),
                           ),
                         ),
                       ),

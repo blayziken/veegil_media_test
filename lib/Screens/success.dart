@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:veegil_media_test/utils/margins.dart';
 
 class Success extends StatefulWidget {
   static const routeName = '/success';
@@ -20,7 +19,7 @@ class _SuccessState extends State<Success> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(media.height * 0.02),
           child: Container(
             height: media.height,
             width: double.infinity,
@@ -35,18 +34,25 @@ class _SuccessState extends State<Success> {
                     children: [
                       Icon(
                         Icons.check_circle_outline_sharp,
-                        size: 80,
+                        size: media.height * 0.090,
                         color: Colors.green,
                       ),
-                      yMargin100,
+                      SizedBox(height: media.height * 0.100),
+                      // yMargin100,
                       Text(
                         '${widget.text} was',
-                        style: TextStyle(fontSize: 35, color: Colors.green, fontWeight: FontWeight.w900),
+                        style: TextStyle(
+                            fontSize: media.height * 0.04,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w900),
                       ),
-                      yMargin5,
+                      SizedBox(height: media.height * 0.005),
                       Text(
                         'Success',
-                        style: TextStyle(fontSize: 80, color: Colors.green, fontWeight: FontWeight.w900),
+                        style: TextStyle(
+                            fontSize: media.height * 0.09,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w900),
                       ),
                     ],
                   ),
@@ -66,13 +72,14 @@ class _SuccessState extends State<Success> {
                           'Close',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 25,
+                            fontSize: media.height * 0.035,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                     ),
-                    onTap: () => Navigator.pushReplacementNamed(context, '/home'),
+                    onTap: () =>
+                        Navigator.pushReplacementNamed(context, '/home'),
                   ),
                 ),
                 Spacer(),

@@ -9,7 +9,10 @@ class TransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     final transaction = Provider.of<Transaction>(context);
+
     String title = '';
     String amount = '';
     Color color = Colors.black;
@@ -29,19 +32,20 @@ class TransactionTile extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: media.height * 0.010),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             transaction.date, //'Date',
-            style: TextStyle(fontSize: 17, fontStyle: FontStyle.italic),
+            style: TextStyle(
+                fontSize: media.height * 0.019, fontStyle: FontStyle.italic),
           ),
           Padding(
-            padding: EdgeInsets.all(5.0),
+            padding: EdgeInsets.all(media.height * 0.005),
             child: InkWell(
               child: Container(
-                height: 70,
+                height: media.height * 0.080,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   boxShadow: [
@@ -54,26 +58,37 @@ class TransactionTile extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
+                  padding: EdgeInsets.only(
+                      top: media.height * 0.005,
+                      bottom: media.height * 0.005,
+                      left: media.height * 0.010,
+                      right: media.height * 0.010),
                   child: Row(
                     children: [
                       CircleAvatar(
-                        radius: 15,
+                        radius: media.height * 0.018,
                         child: Icon(Icons.assignment),
                       ),
-                      xMargin20,
+                      SizedBox(width: media.height * 0.020),
+                      // xMargin20,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             title, //transaction.phoneNumber, // 'Phone Numberr',
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: media.height * 0.025,
+                                fontWeight: FontWeight.bold),
                           ),
-                          yMargin5,
+                          SizedBox(height: media.height * 0.005),
+
+                          // yMargin5,
                           Text(
                             transaction.time, // Time
-                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                            style: TextStyle(
+                                fontSize: media.height * 0.018,
+                                fontWeight: FontWeight.w300),
                           )
                         ],
                       ),
@@ -81,7 +96,7 @@ class TransactionTile extends StatelessWidget {
                       Text(
                         amount, //transaction.amount, //'51.00',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: media.height * 0.026,
                           fontWeight: FontWeight.w900,
                           color: color,
                         ),

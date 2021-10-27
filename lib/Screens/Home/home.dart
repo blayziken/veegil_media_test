@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           height: media.height * 0.08, //60
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            padding: EdgeInsets.symmetric(horizontal: media.height * 0.040),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -53,6 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Column NavBarTab(String title, int number, IconData icon) {
+    Size media = MediaQuery.of(context).size;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         InkWell(
           child: Icon(
             icon,
-            size: 25,
+            size: media.height * 0.035,
             color: currentState == number ? Colors.black : Colors.grey,
           ),
           onTap: () {
@@ -69,13 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
         ),
-        SizedBox(height: 2),
+        SizedBox(height: media.height * 0.005),
         Text(
           title,
           style: TextStyle(
             color: currentState == number ? Colors.black : Colors.grey,
-            fontSize: 13,
-            fontWeight: currentState == number ? FontWeight.w900 : FontWeight.w700,
+            fontSize: media.height * 0.015,
+            fontWeight:
+                currentState == number ? FontWeight.w900 : FontWeight.w700,
           ),
         ),
       ],

@@ -37,7 +37,7 @@ class TransactionDetails extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(media.height * 0.020),
         child: Column(
           children: [
             Expanded(
@@ -45,11 +45,14 @@ class TransactionDetails extends StatelessWidget {
               child: Center(
                 child: Text(
                   date, // 'Date',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                  style: TextStyle(
+                      fontSize: media.height * 0.019,
+                      fontWeight: FontWeight.w300),
                 ),
               ),
             ),
-            yMargin30,
+            SizedBox(height: media.height * 0.030),
+            // yMargin30,
             Expanded(
               flex: 0,
               child: Column(
@@ -58,41 +61,61 @@ class TransactionDetails extends StatelessWidget {
                 children: [
                   Text(
                     'Amount',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                        fontSize: media.height * 0.023,
+                        fontWeight: FontWeight.w300),
                   ),
+                  SizedBox(height: media.height * 0.005),
                   Text(
                     amount, //'N50.00',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: color),
+                    style: TextStyle(
+                        fontSize: media.height * 0.035,
+                        fontWeight: FontWeight.w900,
+                        color: color),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin10,
+                  SizedBox(height: media.height * 0.025),
+                  // yMargin10,
                   Text(
                     'To',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                        fontSize: media.height * 0.023,
+                        fontWeight: FontWeight.w300),
                   ),
                   Text(
                     title, //'AIRTTEL',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                    style: TextStyle(
+                        fontSize: media.height * 0.035,
+                        fontWeight: FontWeight.w900),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin10,
+                  SizedBox(height: media.height * 0.025),
                   Text(
                     'Description',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                        fontSize: media.height * 0.023,
+                        fontWeight: FontWeight.w300),
                   ),
                   Text(
                     description.toUpperCase(), //'AIRTTEL -237372828',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: color),
+                    style: TextStyle(
+                        fontSize: media.height * 0.035,
+                        fontWeight: FontWeight.w900,
+                        color: color),
                   ),
                   Divider(thickness: 1, color: Colors.black),
-                  yMargin10,
+                  SizedBox(height: media.height * 0.025),
                   Text(
                     'Fees',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                        fontSize: media.height * 0.023,
+                        fontWeight: FontWeight.w300),
                   ),
                   Text(
                     'N0.00',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                    style: TextStyle(
+                        fontSize: media.height * 0.035,
+                        fontWeight: FontWeight.w900),
                   ),
                   Divider(thickness: 1, color: Colors.black),
                 ],
@@ -104,7 +127,7 @@ class TransactionDetails extends StatelessWidget {
               child: InkWell(
                 child: Container(
                   height: media.height * 0.06,
-                  width: media.width * 0.4,
+                  width: media.width * 0.35,
                   decoration: BoxDecoration(
                     color: Colors.purple,
                     borderRadius: BorderRadius.circular(50),
@@ -112,14 +135,17 @@ class TransactionDetails extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Done',
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: media.height * 0.035,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
                     ),
                   ),
                 ),
                 onTap: () => Navigator.pop(context),
               ),
             ),
-            yMargin30,
+            SizedBox(height: media.height * 0.035),
           ],
         ),
       ),

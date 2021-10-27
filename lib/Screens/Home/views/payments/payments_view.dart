@@ -7,6 +7,8 @@ class PaymentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -20,7 +22,7 @@ class PaymentsView extends StatelessWidget {
         // color: Colors.teal,
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(media.height * 0.020),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -71,11 +73,13 @@ class PaymentsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: InkWell(
         child: Container(
-          height: 60,
+          height: media.height * 0.075,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -90,10 +94,11 @@ class PaymentsTile extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: media.height * 0.015),
             child: Row(
               children: [
-                Icon(Icons.note_add_sharp, size: 35, color: Colors.purple),
+                Icon(Icons.note_add_sharp,
+                    size: media.height * 0.035, color: Colors.purple),
                 xMargin10,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,17 +106,24 @@ class PaymentsTile extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.w900),
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontSize: media.height * 0.025,
+                          fontWeight: FontWeight.w900),
                     ),
                     // yMargin5,
                     Text(
                       desc,
-                      style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w300),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: media.height * 0.017,
+                          fontWeight: FontWeight.w300),
                     ),
                   ],
                 ),
                 Spacer(),
-                Icon(Icons.arrow_forward_ios_rounded, color: Colors.purple, size: 20),
+                Icon(Icons.arrow_forward_ios_rounded,
+                    color: Colors.purple, size: media.height * 0.025),
               ],
             ),
           ),

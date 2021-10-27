@@ -10,7 +10,10 @@ class DepositHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final transactionsData = Provider.of<Transactions>(context, listen: false).depositTransactions;
+    Size media = MediaQuery.of(context).size;
+
+    final transactionsData =
+        Provider.of<Transactions>(context, listen: false).depositTransactions;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +29,10 @@ class DepositHistory extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10, top: 20),
+        padding: EdgeInsets.only(
+            left: media.height * 0.010,
+            right: media.height * 0.010,
+            top: media.height * 0.020),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

@@ -30,8 +30,10 @@ class _SignupState extends State<Signup> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               IconButton(
-                padding: EdgeInsets.only(top: 30, left: 30),
-                icon: Icon(Icons.arrow_back_ios, color: Colors.red, size: 30.0),
+                padding: EdgeInsets.only(
+                    top: media.height * 0.030, left: media.height * 0.030),
+                icon: Icon(Icons.arrow_back_ios,
+                    color: Colors.red, size: media.height * 0.030),
                 onPressed: () => Navigator.pop(context),
               ),
               Expanded(
@@ -40,14 +42,16 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 30.0),
+                      padding: EdgeInsets.only(
+                          left: media.height * 0.030,
+                          top: media.height * 0.030),
                       child: RichText(
                         text: TextSpan(
                           text: 'Create An',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: 37.0,
+                            fontSize: media.height * 0.050,
                           ),
                           children: <TextSpan>[
                             TextSpan(
@@ -61,27 +65,36 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 10.0),
+                      padding: EdgeInsets.only(
+                          left: media.height * 0.030,
+                          top: media.height * 0.010),
                       child: Text(
                         'And discover an amazing experience...',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54, fontSize: 17.5),
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                          fontSize: media.height * 0.02,
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: media.height * 0.005),
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
+                  padding: EdgeInsets.only(
+                      left: media.height * 0.030,
+                      bottom: media.height * 0.010,
+                      right: media.height * 0.060),
                   child: Form(
                     key: _formKey2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         _buildPhoneNumber(),
-                        SizedBox(height: 30),
+                        SizedBox(height: media.height * 0.030),
                         _buildPassword(),
                       ],
                     ),
@@ -94,8 +107,8 @@ class _SignupState extends State<Signup> {
                     Center(
                       child: InkWell(
                         child: Container(
-                          height: 60,
-                          width: 60,
+                          height: media.height * 0.070,
+                          width: media.height * 0.070,
                           decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(50),
@@ -104,12 +117,13 @@ class _SignupState extends State<Signup> {
                             child: _spinner
                                 ? CircularProgressIndicator(
                                     backgroundColor: Colors.white,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.red),
                                   )
                                 : Icon(
                                     Icons.arrow_forward,
                                     color: Colors.white,
-                                    size: 30.0,
+                                    size: media.height * 0.04,
                                   ),
                           ),
                         ),
@@ -165,14 +179,15 @@ class _SignupState extends State<Signup> {
                             text: 'Already have an account?',
                             style: TextStyle(
                               color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15.0,
+                              fontWeight: FontWeight.normal,
+                              fontSize: media.height * 0.020,
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 text: ' Login',
                                 style: TextStyle(
                                   color: Colors.red,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
@@ -183,7 +198,7 @@ class _SignupState extends State<Signup> {
                         },
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: media.height * 0.030),
                   ],
                 ),
               )

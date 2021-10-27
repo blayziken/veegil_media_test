@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
-import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
 import '../../../success.dart';
 
@@ -24,7 +23,8 @@ class _SendMoneyState extends State<SendMoney> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _bankController = TextEditingController();
-  final TextEditingController _accountNumberController = TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
   NetworkHandler networkHandler = NetworkHandler();
@@ -35,7 +35,9 @@ class _SendMoneyState extends State<SendMoney> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: InkWell(child: Icon(Icons.arrow_back_ios), onTap: () => Navigator.pop(context)),
+        leading: InkWell(
+            child: Icon(Icons.arrow_back_ios),
+            onTap: () => Navigator.pop(context)),
         title: Text(
           "Transfer",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
@@ -46,7 +48,7 @@ class _SendMoneyState extends State<SendMoney> {
         height: media.height,
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(media.height * 0.020),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,33 +63,48 @@ class _SendMoneyState extends State<SendMoney> {
                     children: [
                       Text(
                         "Amount",
-                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: media.height * 0.022,
+                            fontWeight: FontWeight.w300),
                       ),
-                      yMargin5,
+                      // yMargin5,
+                      SizedBox(height: media.height * 0.005),
                       _buildAmountField(),
                       ErrorText(error: error),
-                      yMargin10,
+                      SizedBox(height: media.height * 0.010),
                       Text(
                         "Bank",
-                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: media.height * 0.022,
+                            fontWeight: FontWeight.w300),
                       ),
-                      yMargin5,
+                      SizedBox(height: media.height * 0.005),
                       _buildBankField(),
                       ErrorText(error: error),
-                      yMargin10,
+                      SizedBox(height: media.height * 0.010),
                       Text(
                         "Account Number",
-                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: media.height * 0.022,
+                            fontWeight: FontWeight.w300),
                       ),
-                      yMargin5,
+                      SizedBox(height: media.height * 0.005),
                       _buildAccountNumberField(),
-                      ErrorText(error: error), // ErrorText(error: accountNumberError),
-                      yMargin10,
+                      ErrorText(
+                          error:
+                              error), // ErrorText(error: accountNumberError),
+                      SizedBox(height: media.height * 0.010),
                       Text(
                         "Add a note (optional)",
-                        style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: media.height * 0.022,
+                            fontWeight: FontWeight.w300),
                       ),
-                      yMargin5,
+                      SizedBox(height: media.height * 0.005),
                       _buildAddNoteField(),
                     ],
                   ),
@@ -103,7 +120,7 @@ class _SendMoneyState extends State<SendMoney> {
                         )
                       : InkWell(
                           child: Container(
-                            height: 60,
+                            height: media.height * 0.060,
                             width: media.width * 0.45,
                             decoration: BoxDecoration(
                               color: Colors.purple,
@@ -121,7 +138,7 @@ class _SendMoneyState extends State<SendMoney> {
                                 child: Text(
                               'Send',
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: media.height * 0.030,
                                 color: Colors.white,
                               ),
                             )),
@@ -141,12 +158,18 @@ class _SendMoneyState extends State<SendMoney> {
                             print(_noteController.text);
 
                             // Check if there's enough balance to transfer out
-                            final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
-                            if (int.parse(accountBalance) < int.parse(_amountController.text)) {
+                            final accountBalance = Provider.of<Transactions>(
+                                    context,
+                                    listen: false)
+                                .accountBalance
+                                .replaceAll(",", "");
+                            if (int.parse(accountBalance) <
+                                int.parse(_amountController.text)) {
                               setState(() {
                                 _spinner = false;
                               });
-                              return showDialogWidget(context, 'Insufficient Balance');
+                              return showDialogWidget(
+                                  context, 'Insufficient Balance');
                             }
 
                             var _transaction = Transaction(
@@ -196,8 +219,11 @@ class _SendMoneyState extends State<SendMoney> {
                             //   throw error;
                             // }
 
-                            Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                            Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
+                            Provider.of<Transactions>(context, listen: false)
+                                .addTransaction(_transaction);
+                            Provider.of<Transactions>(context, listen: false)
+                                .deductAccountBalance(
+                                    int.parse(_amountController.text));
 
                             setState(() {
                               _spinner = false;
@@ -215,7 +241,7 @@ class _SendMoneyState extends State<SendMoney> {
                         ),
                 ),
               ),
-              yMargin5,
+              SizedBox(height: media.height * 0.005),
               // Spacer(),
             ],
           ),
@@ -225,10 +251,12 @@ class _SendMoneyState extends State<SendMoney> {
   }
 
   Widget _buildAmountField() {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: Container(
-        height: 55,
+        height: media.height * 0.065,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
@@ -241,15 +269,17 @@ class _SendMoneyState extends State<SendMoney> {
           ],
           style: TextStyle(
             color: Colors.black,
-            fontSize: 22.0,
+            fontSize: media.height * 0.025,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: media.height * 0.022,
+                vertical: media.height * 0.017),
             hintText: 'N0.00',
             hintStyle: TextStyle(
               color: Colors.grey[400],
-              fontSize: 20.0,
+              fontSize: media.height * 0.025,
               fontWeight: FontWeight.normal,
             ),
             errorStyle: TextStyle(
@@ -272,10 +302,12 @@ class _SendMoneyState extends State<SendMoney> {
   }
 
   Widget _buildBankField() {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: Container(
-        height: 55,
+        height: media.height * 0.065,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
@@ -285,11 +317,13 @@ class _SendMoneyState extends State<SendMoney> {
             controller: _bankController,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 22.0,
+              fontSize: media.height * 0.025,
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: media.height * 0.022,
+                  vertical: media.height * 0.017),
               hintText: 'Which Bank',
               hintStyle: TextStyle(
                 color: Colors.grey[400],
@@ -317,10 +351,12 @@ class _SendMoneyState extends State<SendMoney> {
   }
 
   Widget _buildAccountNumberField() {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: Container(
-        height: 55,
+        height: media.height * 0.065,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
@@ -333,11 +369,13 @@ class _SendMoneyState extends State<SendMoney> {
           controller: _accountNumberController,
           style: TextStyle(
             color: Colors.black,
-            fontSize: 22.0,
+            fontSize: media.height * 0.025,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: media.height * 0.022,
+                vertical: media.height * 0.017),
             hintText: '0123456789',
             hintStyle: TextStyle(
               color: Colors.grey[400],
@@ -364,10 +402,12 @@ class _SendMoneyState extends State<SendMoney> {
   }
 
   Widget _buildAddNoteField() {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: Container(
-        height: 55,
+        height: media.height * 0.065,
         decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
@@ -376,11 +416,13 @@ class _SendMoneyState extends State<SendMoney> {
           controller: _noteController,
           style: TextStyle(
             color: Colors.black,
-            fontSize: 22.0,
+            fontSize: media.height * 0.025,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: media.height * 0.022,
+                vertical: media.height * 0.017),
             hintText: 'What\'s this for?',
             hintStyle: TextStyle(
               color: Colors.grey[400],
@@ -408,9 +450,15 @@ class ErrorText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     return Text(
       error,
-      style: TextStyle(color: Colors.red, fontSize: 15, fontStyle: FontStyle.italic, fontWeight: FontWeight.w300),
+      style: TextStyle(
+          color: Colors.red,
+          fontSize: media.height * 0.018,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w300),
     );
   }
 }

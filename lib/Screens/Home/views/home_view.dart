@@ -17,12 +17,13 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
-    final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance;
+    final accountBalance =
+        Provider.of<Transactions>(context, listen: false).accountBalance;
 
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(media.height * 0.010),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -31,33 +32,45 @@ class _HomeViewState extends State<HomeView> {
                 flex: 0,
                 child: Row(
                   children: [
-                    CircleAvatar(radius: 20, child: Icon(Icons.person, size: 25, color: Colors.white)),
+                    CircleAvatar(
+                        radius: media.height * 0.025,
+                        child: Icon(Icons.person,
+                            size: media.height * 0.030, color: Colors.white)),
                     xMargin10,
-                    Text('Hi, Welcome!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                    Text('Hi, Welcome!',
+                        style: TextStyle(
+                            fontSize: media.height * 0.025,
+                            fontWeight: FontWeight.w600)),
                     Spacer(),
                     InkWell(
                       child: Row(
                         children: [
-                          Text('Deposit', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                          Text('Deposit',
+                              style: TextStyle(
+                                  fontSize: media.height * 0.025,
+                                  fontWeight: FontWeight.w900)),
                           xMargin5,
                           Container(
-                            height: 30,
-                            width: 30,
+                            height: media.height * 0.030,
+                            width: media.height * 0.030,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(50),
-                              border: Border.all(color: Colors.purple, width: 2),
+                              border:
+                                  Border.all(color: Colors.purple, width: 2),
                             ),
                             child: Center(
                               child: Container(
-                                height: 20,
-                                width: 20,
+                                height: media.height * 0.020,
+                                width: media.height * 0.020,
                                 decoration: BoxDecoration(
                                   color: Colors.purple,
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: Center(
-                                  child: Icon(Icons.add, size: 20, color: Colors.white),
+                                  child: Icon(Icons.add,
+                                      size: media.height * 0.020,
+                                      color: Colors.white),
                                 ),
                               ),
                             ),
@@ -85,12 +98,18 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         'Account Balance',
-                        style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            fontSize: media.height * 0.025,
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w400),
                       ),
                       yMargin5,
                       Text(
                         'N ${accountBalance}',
-                        style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.w900),
+                        style: TextStyle(
+                            fontSize: media.height * 0.050,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
                       ),
                       // yMargin20,
                     ],
@@ -101,10 +120,13 @@ class _HomeViewState extends State<HomeView> {
               Center(
                 child: Text(
                   'Transactions',
-                  style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      fontSize: media.height * 0.025,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w800),
                 ),
               ),
-              Divider(thickness: 1),
+              Divider(thickness: 2),
               // yMargin5,
               Expanded(
                 child: Container(
@@ -112,13 +134,15 @@ class _HomeViewState extends State<HomeView> {
                   // color: Colors.teal,
                   child: ListView.builder(
                     itemBuilder: (BuildContext context, int index) {
-                      final transactionsData = Provider.of<Transactions>(context).transactions;
+                      final transactionsData =
+                          Provider.of<Transactions>(context).transactions;
                       return ChangeNotifierProvider.value(
                         value: transactionsData[index],
                         child: TransactionTile(),
                       );
                     },
-                    itemCount: Provider.of<Transactions>(context, listen: false).getTransactionsListLength(),
+                    itemCount: Provider.of<Transactions>(context, listen: false)
+                        .getTransactionsListLength(),
                   ),
                 ),
               ),

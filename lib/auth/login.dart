@@ -32,8 +32,12 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 IconButton(
-                  padding: EdgeInsets.only(left: 20, top: 20, bottom: 10),
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.red, size: 30.0),
+                  padding: EdgeInsets.only(
+                      left: media.height * 0.020,
+                      top: media.height * 0.020,
+                      bottom: media.height * 0.010),
+                  icon: Icon(Icons.arrow_back_ios,
+                      color: Colors.red, size: media.height * 0.030),
                   onPressed: () => Navigator.pop(context),
                 ),
                 Expanded(
@@ -42,14 +46,16 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 30.0, top: 10.0),
+                        padding: EdgeInsets.only(
+                            left: media.height * 0.030,
+                            top: media.height * 0.010),
                         child: RichText(
                           text: TextSpan(
                             text: 'Welcome',
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 37.0,
+                              fontSize: media.height * 0.057,
                             ),
                             children: <TextSpan>[
                               TextSpan(
@@ -63,31 +69,36 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 30.0, top: 5.0),
+                        padding: EdgeInsets.only(
+                            left: media.height * 0.030,
+                            top: media.height * 0.005),
                         child: Text(
                           'We missed you.',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                             color: Colors.black54,
-                            fontSize: 17.5,
+                            fontSize: media.height * 0.027,
                           ),
                         ),
                       )
                     ],
                   ),
                 ),
-                SizedBox(height: 30.0),
+                SizedBox(height: media.height * 0.030),
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 30.0, bottom: 10.0, right: 60),
+                    padding: EdgeInsets.only(
+                        left: media.height * 0.030,
+                        bottom: media.height * 0.010,
+                        right: media.height * 0.060),
                     child: Form(
                       key: _formKey,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           _buildPhoneNumber(),
-                          SizedBox(height: 30),
+                          SizedBox(height: media.height * 0.030),
                           _buildPassword(),
                         ],
                       ),
@@ -101,8 +112,8 @@ class _LoginState extends State<Login> {
                       Center(
                         child: InkWell(
                           child: Container(
-                            height: 60,
-                            width: 60,
+                            height: media.height * 0.07,
+                            width: media.height * 0.07,
                             decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(50),
@@ -111,9 +122,12 @@ class _LoginState extends State<Login> {
                               child: _spinner
                                   ? CircularProgressIndicator(
                                       backgroundColor: Colors.white,
-                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.red),
                                     )
-                                  : Icon(Icons.arrow_forward, color: Colors.white, size: 30.0),
+                                  : Icon(Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: media.height * 0.040),
                             ),
                           ),
                           onTap: () async {
@@ -162,7 +176,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: media.height * 0.030),
                 // Spacer(),
               ],
             ),

@@ -44,7 +44,7 @@ class _WithdrawState extends State<Withdraw> {
         ),
         title: Text(
           'Withdraw',
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: media.height * 0.025),
         ),
       ),
       body: Container(
@@ -57,7 +57,10 @@ class _WithdrawState extends State<Withdraw> {
                 ),
               )
             : Padding(
-                padding: EdgeInsets.only(top: 15, left: 25.0, right: 25.0),
+                padding: EdgeInsets.only(
+                    top: media.height * 0.015,
+                    left: media.height * 0.025,
+                    right: media.height * 0.025),
                 child: Column(
                   children: [
                     Expanded(
@@ -70,8 +73,8 @@ class _WithdrawState extends State<Withdraw> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 35,
-                                width: 35,
+                                height: media.height * 0.045,
+                                width: media.height * 0.045,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.purple,
@@ -79,15 +82,22 @@ class _WithdrawState extends State<Withdraw> {
                                 child: Center(
                                   child: Text(
                                     'N',
-                                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: media.height * 0.027,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),
-                              xMargin20,
+                              SizedBox(width: media.height * 0.025),
+                              // xMargin20,
                               Flexible(
                                 child: Text(
                                   text,
-                                  style: TextStyle(fontSize: 80, fontWeight: FontWeight.w900, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: media.height * 0.090,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.black),
                                 ),
                               ),
                             ],
@@ -95,7 +105,7 @@ class _WithdrawState extends State<Withdraw> {
                         ),
                       ),
                     ),
-                    yMargin25,
+                    SizedBox(height: media.height * 0.035),
                     Expanded(
                       flex: 3,
                       child: NumericKeyboard(
@@ -110,10 +120,10 @@ class _WithdrawState extends State<Withdraw> {
                           Icons.backspace_rounded,
                           color: Colors.black,
                         ),
-                        // leftButtonFn: () {
-                        //   print('left button clicked');
-                        //   print(text);
-                        // },
+                        leftButtonFn: () {
+                          print('left button clicked');
+                          print(text);
+                        },
                         // leftIcon: Icon(
                         //   Icons.check,
                         //   color: Colors.black,
@@ -126,7 +136,7 @@ class _WithdrawState extends State<Withdraw> {
                       flex: 0,
                       child: InkWell(
                         child: Container(
-                          height: media.height * 0.058,
+                          height: media.height * 0.07,
                           width: media.width * 0.4,
                           decoration: BoxDecoration(
                             color: Colors.purple,
@@ -134,8 +144,11 @@ class _WithdrawState extends State<Withdraw> {
                           ),
                           child: Center(
                             child: Text(
-                              'Withdraw',
-                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white),
+                              'Deposit',
+                              style: TextStyle(
+                                  fontSize: media.height * 0.035,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
@@ -179,12 +192,16 @@ class _WithdrawState extends State<Withdraw> {
                           final amount = int.parse(text);
 
                           // Check if there's enough balance to transfer out
-                          final accountBalance = Provider.of<Transactions>(context, listen: false).accountBalance.replaceAll(",", "");
+                          final accountBalance =
+                              Provider.of<Transactions>(context, listen: false)
+                                  .accountBalance
+                                  .replaceAll(",", "");
                           if (int.parse(accountBalance) < int.parse(text)) {
                             setState(() {
                               _spinner = false;
                             });
-                            return showDialogWidget(context, 'Insufficient Balance');
+                            return showDialogWidget(
+                                context, 'Insufficient Balance');
                           }
 
                           Map<String, String> body = {
@@ -228,21 +245,25 @@ class _WithdrawState extends State<Withdraw> {
                           //   throw error;
                           // }
 
-                          Provider.of<Transactions>(context, listen: false).deductAccountBalance(amount);
+                          Provider.of<Transactions>(context, listen: false)
+                              .deductAccountBalance(amount);
 
                           var _transaction = Transaction(
                             type: 'Withdraw',
                             amount: amount.toString(),
                           );
 
-                          Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
+                          Provider.of<Transactions>(context, listen: false)
+                              .addTransaction(_transaction);
                           setState(() {
                             _spinner = false;
                           });
 
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Success(text: 'Withdraw')),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Success(text: 'Withdraw')),
                           );
                         },
                       ),

@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:veegil_media_test/utils/margins.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -20,7 +21,10 @@ class TransactionsView extends StatelessWidget {
         // color: Colors.teal,
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 40),
+          padding: EdgeInsets.only(
+              left: media.height * 0.020,
+              right: media.height * 0.020,
+              top: media.height * 0.040),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -30,11 +34,13 @@ class TransactionsView extends StatelessWidget {
                 desc: "All deposit history",
                 onTap: () => Navigator.pushNamed(context, '/deposit-history'),
               ),
-              yMargin30,
+              // yMargin30,
+              SizedBox(height: media.height * 0.030),
               HistoryTile(
                 title: "Withdrawal History",
                 desc: "All deposit history",
-                onTap: () => Navigator.pushNamed(context, '/withdrawal-history'),
+                onTap: () =>
+                    Navigator.pushNamed(context, '/withdrawal-history'),
               ),
             ],
           ),
@@ -58,11 +64,13 @@ class HistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size media = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 0,
       child: InkWell(
         child: Container(
-          height: 60,
+          height: media.height * 0.070,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -77,28 +85,36 @@ class HistoryTile extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: media.height * 0.015),
             child: Row(
               children: [
-                Icon(Icons.table_rows_rounded, size: 35, color: Colors.purple),
-                xMargin10,
+                Icon(Icons.table_rows_rounded,
+                    size: media.height * 0.035, color: Colors.purple),
+                SizedBox(width: media.height * 0.015),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       title,
-                      style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.w900),
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontSize: media.height * 0.025,
+                          fontWeight: FontWeight.w900),
                     ),
                     // yMargin5,
                     Text(
                       desc,
-                      style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w300),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: media.height * 0.018,
+                          fontWeight: FontWeight.w300),
                     ),
                   ],
                 ),
                 Spacer(),
-                Icon(Icons.arrow_forward_ios_rounded, color: Colors.purple, size: 20),
+                Icon(Icons.arrow_forward_ios_rounded,
+                    color: Colors.purple, size: media.height * 0.025),
               ],
             ),
           ),
