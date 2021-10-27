@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:veegil_media_test/Screens/Home/views/more/users.dart';
 import 'Screens/Home/views/payments/transfer.dart';
 import 'Screens/deposit.dart';
 import 'Screens/success.dart';
@@ -46,8 +45,6 @@ class MyApp extends StatelessWidget {
           // Transaction Histories
           DepositHistory.routeName: (context) => DepositHistory(),
           WithdrawalHistory.routeName: (context) => WithdrawalHistory(),
-
-          Users.routeName: (context) => Users(),
         },
       ),
     );

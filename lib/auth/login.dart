@@ -153,6 +153,7 @@ class _LoginState extends State<Login> {
                             try {
                               var response =
                                   await networkHandler.post('auth/login', body);
+                              print(response.body);
                               if (response.statusCode == 200 ||
                                   response.statusCode == 201) {
                                 setState(() {
