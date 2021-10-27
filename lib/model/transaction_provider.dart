@@ -7,6 +7,15 @@ class Transactions extends ChangeNotifier {
   List<Transaction> _transactions = [];
   List<Transaction> _depositTransactions = [];
   List<Transaction> _withdrawalTransactions = [];
+  String phoneNumber = '';
+
+  Future<void> userPhoneNumber(number) async {
+    phoneNumber = number;
+  }
+
+  String get PhoneNumber {
+    return phoneNumber;
+  }
 
   String get accountBalance {
     return NumberFormat("###,###", "en_US").format(_accountBalance);

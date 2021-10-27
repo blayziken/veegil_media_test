@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 NavBarTab('Home', 0, Icons.home), //Icon(Icons.home)
                 NavBarTab('Payments', 1, Icons.send_outlined),
                 NavBarTab('Transactions', 2, Icons.assignment_outlined),
-                NavBarTab('Profile', 3, Icons.account_circle_outlined),
+                NavBarTab('More', 3, Icons.electric_moped_rounded),
               ],
             ),
           ),

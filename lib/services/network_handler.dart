@@ -14,7 +14,7 @@ class NetworkHandler {
   Future<http.Response> post(String url, Map<String, String> body) async {
     var callUrl = Uri.parse('$baseURL/$url');
 
-    var response = await http.post(callUrl, body: json.encode(body));
+    var response = await http.post(callUrl, body: body);
     return (response);
   }
 }

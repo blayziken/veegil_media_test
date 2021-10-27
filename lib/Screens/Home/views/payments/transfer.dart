@@ -6,17 +6,18 @@ import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 import '../../../success.dart';
 
-class SendMoney extends StatefulWidget {
+class Transfer extends StatefulWidget {
   static const routeName = '/transfer-money';
 
-  const SendMoney({Key? key}) : super(key: key);
+  const Transfer({Key? key}) : super(key: key);
   @override
-  State<SendMoney> createState() => _SendMoneyState();
+  State<Transfer> createState() => _TransferState();
 }
 
-class _SendMoneyState extends State<SendMoney> {
+class _TransferState extends State<Transfer> {
   String error = "";
   bool _spinner = false;
 
@@ -96,16 +97,16 @@ class _SendMoneyState extends State<SendMoney> {
                       ErrorText(
                           error:
                               error), // ErrorText(error: accountNumberError),
-                      SizedBox(height: media.height * 0.010),
-                      Text(
-                        "Add a note (optional)",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: media.height * 0.022,
-                            fontWeight: FontWeight.w300),
-                      ),
-                      SizedBox(height: media.height * 0.005),
-                      _buildAddNoteField(),
+                      // SizedBox(height: media.height * 0.010),
+                      // Text(
+                      //   "Add a note (optional)",
+                      //   style: TextStyle(
+                      //       color: Colors.black,
+                      //       fontSize: media.height * 0.022,
+                      //       fontWeight: FontWeight.w300),
+                      // ),
+                      // SizedBox(height: media.height * 0.005),
+                      // _buildAddNoteField(),
                     ],
                   ),
                 ),
@@ -155,7 +156,7 @@ class _SendMoneyState extends State<SendMoney> {
                             print(_amountController.text);
                             print(_bankController.text);
                             print(_accountNumberController.text);
-                            print(_noteController.text);
+                            // print(_noteController.text);
 
                             // Check if there's enough balance to transfer out
                             final accountBalance = Provider.of<Transactions>(
@@ -177,66 +178,74 @@ class _SendMoneyState extends State<SendMoney> {
                               type: 'Transfer',
                               phoneNumber: _accountNumberController.text,
                               amount: _amountController.text,
-                              note: _noteController.text,
+                              // note: _noteController.text,
                             );
 
                             Map<String, String> body = {
-                              "phoneNumber": _accountNumberController.text,
+                              "phoneNumber": Provider.of<Transactions>(context,
+                                      listen: false)
+                                  .PhoneNumber,
                               "amount": _amountController.text,
                             };
 
-                            // try {
-                            //   var response = await networkHandler.post('accounts/transfer', body);
-                            //
-                            //   if (response.statusCode == 200 || response.statusCode == 201) {
-                            //     Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                            //     Provider.of<Transactions>(context, listen: false).deductAccountBalance(int.parse(_amountController.text));
-                            //
-                            //     setState(() {
-                            //       _spinner = false;
-                            //     });
-                            //
-                            //     Navigator.pushReplacement(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) => Success(
-                            //           text: 'Transfer',
-                            //         ),
-                            //       ),
-                            //     );
-                            //   } else {
-                            //     setState(() {
-                            //       _spinner = false;
-                            //     });
-                            //     customSnackBar(context, 'Server error, try again...');
-                            //     print(response.statusCode);
-                            //   }
-                            //
-                            // } catch (error) {
-                            //   setState(() {
-                            //     _spinner = false;
-                            //   });
-                            //   throw error;
-                            // }
+                            try {
+                              var response = await networkHandler.post(
+                                  'accounts/transfer', body);
 
-                            Provider.of<Transactions>(context, listen: false)
-                                .addTransaction(_transaction);
-                            Provider.of<Transactions>(context, listen: false)
-                                .deductAccountBalance(
-                                    int.parse(_amountController.text));
+                              if (response.statusCode == 200 ||
+                                  response.statusCode == 201) {
+                                Provider.of<Transactions>(context,
+                                        listen: false)
+                                    .addTransaction(_transaction);
+                                Provider.of<Transactions>(context,
+                                        listen: false)
+                                    .deductAccountBalance(
+                                        int.parse(_amountController.text));
 
-                            setState(() {
-                              _spinner = false;
-                            });
+                                setState(() {
+                                  _spinner = false;
+                                });
 
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Success(
-                                  text: 'Transfer',
-                                ),
-                              ),
-                            );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Success(
+                                      text: 'Transfer',
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                setState(() {
+                                  _spinner = false;
+                                });
+                                customSnackBar(
+                                    context, 'Server error, try again...');
+                              }
+                            } catch (error) {
+                              setState(() {
+                                _spinner = false;
+                              });
+                              throw error;
+                            }
+
+                            // Provider.of<Transactions>(context, listen: false)
+                            //     .addTransaction(_transaction);
+                            // Provider.of<Transactions>(context, listen: false)
+                            //     .deductAccountBalance(
+                            //         int.parse(_amountController.text));
+
+                            // setState(() {
+                            //   _spinner = false;
+                            // });
+
+                            // Navigator.pushReplacement(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => Success(
+                            //       text: 'Transfer',
+                            //     ),
+                            //   ),
+                            // );
                           },
                         ),
                 ),

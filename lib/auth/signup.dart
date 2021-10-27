@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 class Signup extends StatefulWidget {
   static const routeName = '/sign-up';
@@ -144,30 +145,34 @@ class _SignupState extends State<Signup> {
                             "password": _passwordController.text,
                           };
 
-                          // try {
-                          //   var response = await networkHandler.post('auth/signup', body);
-                          //
-                          //   if (response.statusCode == 200 || response.statusCode == 201) {
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //
-                          //     Navigator.pushReplacementNamed(context, '/home');
-                          //   } else {
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //     customSnackBar(context, 'Error Signing up, try again...');
-                          //     print(response.statusCode);
-                          //   }
-                          // } catch (error) {
-                          //   setState(() {
-                          //     _spinner = false;
-                          //   });
-                          //   throw (error);
-                          // }
+                          try {
+                            var response =
+                                await networkHandler.post('auth/signup', body);
+                            print(response.body);
+                            if (response.statusCode == 200 ||
+                                response.statusCode == 201) {
+                              setState(() {
+                                _spinner = false;
+                              });
 
-                          Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushReplacementNamed(context, '/home');
+                            } else {
+                              setState(() {
+                                _spinner = false;
+                              });
+                              customSnackBar(
+                                  context, 'Error Signing up, try again...');
+                            }
+                          } catch (error) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            customSnackBar(
+                                context, 'Error Signing in, try again...');
+                            print(error);
+                          }
+
+                          // Navigator.pushReplacementNamed(context, '/home');
                         },
                       ),
                     ),

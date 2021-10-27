@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/transaction_tile.dart';
+import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
   static const routeName = '/home-view';
@@ -45,10 +46,20 @@ class _HomeViewState extends State<HomeView> {
                     InkWell(
                       child: Row(
                         children: [
-                          Text('Deposit',
-                              style: TextStyle(
-                                  fontSize: media.height * 0.025,
-                                  fontWeight: FontWeight.w900)),
+                          InkWell(
+                              child: Text(
+                                'Deposit',
+                                style: TextStyle(
+                                    fontSize: media.height * 0.025,
+                                    fontWeight: FontWeight.w900),
+                              ),
+                              onTap: () async {
+                                var callUrl = Uri.parse(
+                                    'https://bank.veegil.com/accounts/list');
+                                var response = await http.get(callUrl);
+                                print(response);
+                                print(response.body);
+                              }),
                           xMargin5,
                           Container(
                             height: media.height * 0.030,

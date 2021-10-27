@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 class Login extends StatefulWidget {
   static const routeName = '/login';
@@ -147,29 +150,39 @@ class _LoginState extends State<Login> {
                               "password": _passwordController.text,
                             };
 
-                            // try {
-                            //   var response = await networkHandler.post('auth/login', body);
-                            //
-                            //   if (response.statusCode == 200 || response.statusCode == 201) {
-                            //     setState(() {
-                            //       _spinner = false;
-                            //     });
-                            //
-                            //     Navigator.pushReplacementNamed(context, '/home');
-                            //   } else {
-                            //     setState(() {
-                            //       _spinner = false;
-                            //     });
-                            //     customSnackBar(context, 'Error Signing in, try again...');
-                            //   }
-                            // } catch (error) {
-                            //   setState(() {
-                            //     _spinner = false;
-                            //   });
-                            //   throw (error);
-                            // }
+                            try {
+                              var response =
+                                  await networkHandler.post('auth/login', body);
+                              if (response.statusCode == 200 ||
+                                  response.statusCode == 201) {
+                                setState(() {
+                                  _spinner = false;
+                                });
 
-                            Navigator.pushReplacementNamed(context, '/home');
+                                Provider.of<Transactions>(context,
+                                        listen: false)
+                                    .userPhoneNumber(
+                                        _phoneNumberController.text);
+
+                                Navigator.pushReplacementNamed(
+                                    context, '/home');
+                              } else {
+                                setState(() {
+                                  _spinner = false;
+                                });
+                                customSnackBar(
+                                    context, 'Error Signing in, try again...');
+                              }
+                            } catch (error) {
+                              setState(() {
+                                _spinner = false;
+                              });
+                              customSnackBar(
+                                  context, 'Error Signing in, try again...');
+                              throw (error);
+                            }
+
+                            // Navigator.pushReplacementNamed(context, '/home');
                           },
                         ),
                       ),

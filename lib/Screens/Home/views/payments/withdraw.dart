@@ -7,8 +7,8 @@ import 'package:veegil_media_test/Screens/success.dart';
 import 'package:veegil_media_test/model/transaction.dart';
 import 'package:veegil_media_test/model/transaction_provider.dart';
 import 'package:veegil_media_test/services/network_handler.dart';
-import 'package:veegil_media_test/utils/margins.dart';
 import 'package:veegil_media_test/widgets/show_dialog.dart';
+import 'package:veegil_media_test/widgets/snack_bar.dart';
 
 class Withdraw extends StatefulWidget {
   static const routeName = '/withdraw';
@@ -144,7 +144,7 @@ class _WithdrawState extends State<Withdraw> {
                           ),
                           child: Center(
                             child: Text(
-                              'Deposit',
+                              'Withdraw',
                               style: TextStyle(
                                   fontSize: media.height * 0.035,
                                   fontWeight: FontWeight.w600,
@@ -205,70 +205,57 @@ class _WithdrawState extends State<Withdraw> {
                           }
 
                           Map<String, String> body = {
-                            "phoneNumber": '09028373021',
+                            "phoneNumber": Provider.of<Transactions>(context,
+                                    listen: false)
+                                .PhoneNumber,
                             "amount": text,
                           };
 
-                          // try {
-                          //   var response = await networkHandler.post('accounts/withdraw', body);
-                          //
-                          //   if (response.statusCode == 200 || response.statusCode == 201) {
-                          //     Provider.of<Transactions>(context, listen: false).deductAccountBalance(amount);
-                          //
-                          //     var _transaction = Transaction(
-                          //       type: 'Withdraw',
-                          //       amount: amount.toString(),
-                          //     );
-                          //
-                          //     Provider.of<Transactions>(context, listen: false).addTransaction(_transaction);
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //
-                          //     Navigator.pushReplacement(
-                          //       context,
-                          //       MaterialPageRoute(builder: (context) => Success(text: 'Withdraw')),
-                          //     );
-                          //
-                          //   } else {
-                          //     setState(() {
-                          //       _spinner = false;
-                          //     });
-                          //     customSnackBar(context, 'Server error, try again...');
-                          //     print(response.statusCode);
-                          //   }
-                          //
-                          // } catch (error) {
-                          //   setState(() {
-                          //     _spinner = false;
-                          //   });
-                          //   throw error;
-                          // }
+                          try {
+                            var response = await networkHandler.post(
+                                'accounts/withdraw', body);
 
-                          Provider.of<Transactions>(context, listen: false)
-                              .deductAccountBalance(amount);
+                            if (response.statusCode == 200 ||
+                                response.statusCode == 201) {
+                              Provider.of<Transactions>(context, listen: false)
+                                  .deductAccountBalance(amount);
 
-                          var _transaction = Transaction(
-                            type: 'Withdraw',
-                            amount: amount.toString(),
-                          );
+                              var _transaction = Transaction(
+                                type: 'Withdraw',
+                                amount: amount.toString(),
+                              );
 
-                          Provider.of<Transactions>(context, listen: false)
-                              .addTransaction(_transaction);
-                          setState(() {
-                            _spinner = false;
-                          });
+                              Provider.of<Transactions>(context, listen: false)
+                                  .addTransaction(_transaction);
+                              setState(() {
+                                _spinner = false;
+                              });
 
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Success(text: 'Withdraw')),
-                          );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Success(text: 'Withdraw')),
+                              );
+                            } else {
+                              setState(() {
+                                _spinner = false;
+                              });
+                              customSnackBar(
+                                  context, 'Server error, try again...');
+                            }
+                          } catch (error) {
+                            setState(() {
+                              _spinner = false;
+                            });
+                            customSnackBar(
+                                context, 'Server error, try again...');
+                            throw error;
+                          }
                         },
                       ),
                     ),
-                    yMargin15,
+                    SizedBox(height: media.height * 0.015),
                     // Spacer(),
                   ],
                 ),

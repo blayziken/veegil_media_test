@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MoreView extends StatelessWidget {
-  const MoreView({Key? key}) : super(key: key);
+class Users extends StatelessWidget {
+  static const routeName = '/users';
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,14 @@ class MoreView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Tile(
-                title: "Users",
+              UserTile(
+                title: "Users 1",
                 onTap: () => Navigator.pushNamed(context, '/users'),
               ),
               // yMargin30,
               SizedBox(height: media.height * 0.030),
-              Tile(
-                title: "Withdrawal History",
+              UserTile(
+                title: "Users 1",
                 onTap: () =>
                     Navigator.pushNamed(context, '/withdrawal-history'),
               ),
@@ -47,11 +47,11 @@ class MoreView extends StatelessWidget {
   }
 }
 
-class Tile extends StatelessWidget {
+class UserTile extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  const Tile({
+  const UserTile({
     required this.title,
     required this.onTap,
     Key? key,
@@ -98,6 +98,13 @@ class Tile extends StatelessWidget {
                           fontWeight: FontWeight.w900),
                     ),
                     // yMargin5,
+                    Text(
+                      title,
+                      style: TextStyle(
+                          // color: Colors.purple,
+                          fontSize: media.height * 0.018,
+                          fontWeight: FontWeight.normal),
+                    ),
                   ],
                 ),
                 Spacer(),
